@@ -1,0 +1,37 @@
+-- Assumes the imported table is named hr_employee_data.
+Total Employees = COUNTROWS(hr_employee_data)
+
+Active Employees =
+CALCULATE([Total Employees], hr_employee_data[EmploymentStatus] = "Active")
+
+Exited Employees =
+CALCULATE([Total Employees], hr_employee_data[EmploymentStatus] = "Exited")
+
+Average Satisfaction =
+AVERAGE(hr_employee_data[SatisfactionScore])
+
+Average Performance Rating =
+AVERAGE(hr_employee_data[PerformanceRating])
+
+Average Training Hours =
+AVERAGE(hr_employee_data[TrainingHours])
+
+Average Monthly Salary =
+AVERAGE(hr_employee_data[MonthlySalary])
+
+-- Historical exits represented in the sample rows divided by all rows.
+-- For a proper period turnover rate, use a monthly snapshot/headcount table.
+Exit Share of Listed Employees =
+DIVIDE([Exited Employees], [Total Employees], 0)
+
+Active Employee Share =
+DIVIDE([Active Employees], [Total Employees], 0)
+
+Employees by Recruitment Source = [Total Employees]
+
+-- Optional recruitment cohorts by hire year:
+Hires = COUNTROWS(hr_employee_data)
+
+-- These starter measures describe the supplied sample dataset.
+-- They do not constitute a predictive model; hiring forecasts require dated
+-- requisition, application, hiring, and headcount history.
