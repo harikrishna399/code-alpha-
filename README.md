@@ -1,65 +1,52 @@
-# CodeAlpha Power BI Internship — Complete Project Kits
+# CodeAlpha Power BI Analytics Portfolio
 
-This repository contains implementation kits for **all four tasks** listed in the supplied CodeAlpha Power BI internship brief.
+This repository contains all four project tracks from the supplied CodeAlpha Power BI brief. The PDF permits completing any **2 or 3 of 4 tasks**; all four tracks are prepared here.
 
-## Projects
+## Project entry points
 
-| Task | Folder | Included |
-|---|---|---|
-| 1. Financial Health Dashboard | `FinancialHealthDashboard/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
-| 2. Human Resources Analytics | `HRAnalytics/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
-| 3. Real Estate Market Trends | `RealEstateMarketTrends/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
-| 4. Educational Performance & Resource Allocation | `EducationalPerformance/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
+| Task | Supporting folder | Power BI Project source | Browser preview |
+|---|---|---|---|
+| 1. Financial Health Dashboard | [Financial folder](FinancialHealthDashboard/) | [Open PBIP](PowerBIProjects/FinancialHealth/FinancialHealth.pbip) | [Overview](FinancialHealthDashboard/dashboard.html) · [Balance sheet](FinancialHealthDashboard/balance_sheet.html) · [Cash flow](FinancialHealthDashboard/cash_flow.html) |
+| 2. HR Analytics | [HR folder](HRAnalytics/) | [Open PBIP](PowerBIProjects/HRAnalytics/HRAnalytics.pbip) | [Overview](HRAnalytics/dashboard.html) · [Hiring scenario](HRAnalytics/hiring_forecast.html) |
+| 3. Real Estate Market Trends | [Real-estate folder](RealEstateMarketTrends/) | [Open PBIP](PowerBIProjects/RealEstateMarket/RealEstateMarket.pbip) | [Overview](RealEstateMarketTrends/dashboard.html) · [Geographic hotspots](RealEstateMarketTrends/geographic_hotspots.html) |
+| 4. Educational Performance and Resource Allocation | [Education folder](EducationalPerformance/) | [Open PBIP](PowerBIProjects/EducationPerformance/EducationPerformance.pbip) | [Academic overview](EducationalPerformance/dashboard.html) · [Resource allocation](EducationalPerformance/resource_allocation.html) |
 
-## Build each Power BI report
+The source projects use the Power BI Project (PBIP) format with a TMDL semantic model and PBIR report definitions. The dataset CSV is embedded in the model's Power Query M partitions to avoid machine-specific paths; the human-readable CSV files remain in this repository. Microsoft documents PBIP and PBIR as source-controlled Power BI project formats; see [Power BI project overview](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-overview) and [report folder/PBIR structure](https://learn.microsoft.com/en-us/power-bi/developer/projects/projects-report).
 
-For each project:
+## Open the Power BI projects
 
-1. Open **Power BI Desktop**.
-2. Import the project's CSV using **Get data → Text/CSV**.
-3. Follow its README and Power Query notes to set data types and table names.
-4. Create a Date table and relationships when described in the project README.
-5. Add measures from `DAX_Measures.dax` using **Modeling → New measure**. DAX files are reference text, not directly executable project files.
-6. Build the pages and visuals from `dashboard_layout.md`.
-7. Validate filters, measure totals, formats, and caveats.
-8. Save a native report as `<ProjectName>.pbix` in its project folder, then commit/push it to this repository.
+1. Clone or download this repository.
+2. Open the corresponding .pbip file in a recent Power BI Desktop version.
+3. Review compatibility notices, refresh/apply model changes if prompted, and inspect measures, report visuals, relationships and filters.
+4. Save a native .pbix using **File → Save As** only after Desktop has successfully opened and validated the project.
+5. Commit/push the .pbix file into the corresponding task folder and update PROJECT_STATUS.md.
 
-## Important status and limitations
+**Important limitation:** this environment has no Power BI Desktop engine. The PBIP source files and report definitions have been pushed and JSON syntax checked, but they have not been opened/refreshed/rendered in Desktop here. Native PBIX creation and validation are therefore not claimed as complete.
 
-- CSV files contain **synthetic demonstration data**; they are not real company, employee, property-market, or student records.
-- This repository contains datasets, DAX starter measures, Power Query instructions, and dashboard implementation specifications.
-- **Native Power BI `.pbix` reports are not included yet.** They must be assembled and saved in Power BI Desktop, which is required to create and validate the actual report files.
-- Forecasts must be built and validated with appropriate historical data. Do not present sample trends as verified predictions.
-- The financial sample does not contain a complete balance sheet or transaction-level cash-flow ledger. Real-estate data is illustrative rather than current market data. HR and educational sample results are not suitable for real-world decisions.
+## Validate locally
 
-## Suggested final deliverables
+Run from the repository root:
 
-For each folder, include:
-- `<ProjectName>.pbix` — completed Power BI report
-- Existing CSV, DAX, Power Query notes, layout guide, and README
-- Optional screenshots of report pages for the project presentation
+    python scripts/validate_data.py
+    python scripts/validate_powerbi_projects.py
 
-## Privacy and safe use
+A GitHub Actions workflow runs both checks on pushes and pull requests. These checks verify the data structure and PBIP file references; they do not replace opening and rendering the reports in Power BI Desktop.
 
-Use only authorized data. Avoid publishing personal employee/student information or confidential business records. Apply appropriate access controls before publishing real data to Power BI Service.
+## Data provenance and limitations
 
-## License
+All data files are **synthetic demonstration data**. They are not real company finances, employee records, current property listings, or real student records.
 
-Educational internship/portfolio project.
+- Finance includes separate income-statement, balance-sheet and cash-flow samples, but they are not audited statements.
+- HR includes monthly sample history plus a six-month illustrative headcount scenario, not a statistically validated hiring prediction.
+- Real-estate values are illustrative and not a live market feed. Coordinates indicate approximate neighborhood centers, not specific properties.
+- Education results and resource utilization are synthetic and must not be used to make decisions about real students or staff.
 
-## Browser dashboard previews
+See [DATA_DICTIONARY.md](DATA_DICTIONARY.md) and [PROJECT_STATUS.md](PROJECT_STATUS.md).
 
-The repository now includes four responsive browser previews that read the included CSV files and display summary cards, grouped bar charts, and searchable data tables:
+## PDF-required external steps
 
-- Financial Health: [Open preview](FinancialHealthDashboard/dashboard.html)
-- HR Analytics: [Open preview](HRAnalytics/dashboard.html)
-- Real Estate Trends: [Open preview](RealEstateMarketTrends/dashboard.html)
-- Educational Performance: [Open preview](EducationalPerformance/dashboard.html)
+- Share your internship status on LinkedIn and tag @CodeAlpha.
+- Publish a video explanation with the GitHub repository link.
+- Submit the completed work through the submission form shared in your internship WhatsApp group.
 
-To run them interactively, enable GitHub Pages using the steps in [GITHUB_PAGES.md](GITHUB_PAGES.md). The previews are companion demos, not native Power BI reports.
-
-## Validation and handoff
-
-- Run the CSV structural checks from the repository root: `python scripts/validate_data.py`.
-- Read [PROJECT_STATUS.md](PROJECT_STATUS.md) for the exact completion status and remaining Power BI Desktop steps.
-- Use [LINKEDIN_DEMO_SCRIPT.md](LINKEDIN_DEMO_SCRIPT.md) to record an accurate project demo.
+The narration and recording checklist are in [LINKEDIN_DEMO_SCRIPT.md](LINKEDIN_DEMO_SCRIPT.md). The supplied PDF does not contain the submission form URL, so it must be obtained from the official WhatsApp group. No LinkedIn post, video upload, or form submission is claimed as completed.

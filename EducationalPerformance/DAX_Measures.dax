@@ -1,34 +1,26 @@
--- Table name assumed: student_performance
+-- Academic measures on student_performance
 Student Count = DISTINCTCOUNT(student_performance[StudentID])
-
-Average Attendance % = AVERAGE(student_performance[AttendancePct]) / 100
-
+Average Attendance % = DIVIDE(AVERAGE(student_performance[AttendancePct]), 100, 0)
 Average Math Score = AVERAGE(student_performance[MathScore])
-
 Average Programming Score = AVERAGE(student_performance[ProgrammingScore])
-
 Average Communication Score = AVERAGE(student_performance[CommunicationScore])
-
 Average Overall Score =
-DIVIDE(
-    [Average Math Score] + [Average Programming Score] + [Average Communication Score],
-    3,
-    0
-)
-
+DIVIDE([Average Math Score] + [Average Programming Score] + [Average Communication Score], 3, 0)
 Credits Attempted = SUM(student_performance[CreditsAttempted])
-
 Credits Earned = SUM(student_performance[CreditsEarned])
-
 Credit Completion % = DIVIDE([Credits Earned], [Credits Attempted], 0)
-
 Students Requiring Support =
-CALCULATE(
-    DISTINCTCOUNT(student_performance[StudentID]),
-    student_performance[SupportFlag] = "Yes"
-)
-
+CALCULATE(DISTINCTCOUNT(student_performance[StudentID]), student_performance[SupportFlag] = "Yes")
 Support Share % = DIVIDE([Students Requiring Support], [Student Count], 0)
 
--- These measures are descriptive. A predictive risk model requires larger,
--- validated longitudinal data and careful review before real student decisions.
+-- Resource allocation measures on resource_allocation
+Lab Utilization % =
+DIVIDE(SUM(resource_allocation[LabHoursUsed]), SUM(resource_allocation[LabCapacityHours]), 0)
+Library Utilization % =
+DIVIDE(SUM(resource_allocation[LibraryVisits]), SUM(resource_allocation[LibraryVisitsCapacity]), 0)
+Total Resource Gap Score = SUM(resource_allocation[ResourceGapScore])
+Faculty Gap = SUM(resource_allocation[FacultyRecommended]) - SUM(resource_allocation[FacultyCount])
+Tutor Hour Gap = SUM(resource_allocation[TutorHourGap])
+Students Supported = SUM(resource_allocation[SupportFlagCount])
+
+-- Synthetic descriptive values only; no causal or real-student-risk claim is intended.

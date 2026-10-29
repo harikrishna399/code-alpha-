@@ -1,32 +1,32 @@
--- Create these measures after importing financial_data.csv.
-Total Revenue = SUM(financial_data[Revenue])
-
-Operating Expenses = SUM(financial_data[OperatingExpenses])
-
-Other Expenses = SUM(financial_data[OtherExpenses])
-
-Total Expenses = [Operating Expenses] + [Other Expenses]
-
-Net Profit = [Total Revenue] - [Total Expenses]
-
+-- Main table: income_statement_data
+Total Revenue = SUM(income_statement_data[Revenue])
+Total Cost of Goods Sold = SUM(income_statement_data[CostOfGoodsSold])
+Operating Expenses = SUM(income_statement_data[OperatingExpenses])
+Other Expenses = SUM(income_statement_data[OtherExpenses])
+Depreciation Expense = SUM(income_statement_data[Depreciation])
+Interest Expense = SUM(income_statement_data[InterestExpense])
+Income Tax = SUM(income_statement_data[IncomeTax])
+Total Expenses = SUM(income_statement_data[TotalExpenses])
+Net Profit = SUM(income_statement_data[NetIncome])
 Profit Margin % = DIVIDE([Net Profit], [Total Revenue], 0)
+Revenue Budget = SUM(income_statement_data[BudgetRevenue])
+Expense Budget = SUM(income_statement_data[BudgetExpenses])
+Revenue Variance = [Total Revenue] - [Revenue Budget]
+Expense Variance = [Total Expenses] - [Expense Budget]
 
-Revenue Budget = SUM(financial_data[BudgetRevenue])
+-- Balance sheet table: balance_sheet_data
+Total Assets = SUM(balance_sheet_data[TotalAssets])
+Total Liabilities = SUM(balance_sheet_data[TotalLiabilities])
+Shareholders Equity = SUM(balance_sheet_data[ShareholdersEquity])
+Balance Reconciliation Check = SUM(balance_sheet_data[BalanceCheck])
 
-Expense Budget = SUM(financial_data[BudgetExpenses])
+-- Cash-flow table: cash_flow_data
+Operating Cash Flow = SUM(cash_flow_data[OperatingCashFlow])
+Investing Cash Flow = SUM(cash_flow_data[InvestingCashFlow])
+Financing Cash Flow = SUM(cash_flow_data[FinancingCashFlow])
+Net Cash Flow = SUM(cash_flow_data[NetCashFlow])
+Closing Cash Balance (Latest Date) =
+CALCULATE(MAX(cash_flow_data[ClosingCash]), LASTDATE(DateTable[Date]))
 
-Revenue vs Budget = [Total Revenue] - [Revenue Budget]
-
-Expense vs Budget = [Total Expenses] - [Expense Budget]
-
-Cash Change = SUM(financial_data[ClosingCash]) - SUM(financial_data[OpeningCash])
-
--- Optional month-over-month growth. Create a proper Date table and mark it as a date table first.
-Revenue Previous Month =
-CALCULATE([Total Revenue], DATEADD('Date'[Date], -1, MONTH))
-
-Revenue MoM % =
-DIVIDE([Total Revenue] - [Revenue Previous Month], [Revenue Previous Month], 0)
-
--- Note: Cash Change above is a row-sum style indicator, not a cash-flow statement.
--- For a true cash-flow statement, model cash inflows/outflows as separate transaction rows.
+-- The balance-sheet equation and cash roll-forward are structural sample checks,
+-- not an audited financial statement or statutory cash-flow report.

@@ -1,15 +1,16 @@
-# Viewing the browser previews with GitHub Pages
+# Publish browser previews with GitHub Pages
 
-The HTML dashboards load their CSV files using browser fetch, so they should be served from a website rather than opened as local file URLs.
+1. Open this repository's Settings → Pages.
+2. Under Build and deployment, choose Deploy from a branch.
+3. Select main and /(root), then save.
+4. When GitHub Pages shows the live URL, open the links on the portfolio homepage.
+5. Pages containing relative CSV requests need to be served using HTTP(S); opening a local HTML file may block the data requests.
 
-1. Open the repository Settings → Pages.
-2. Under Build and deployment, select Deploy from a branch.
-3. Select branch main and folder /(root), then save.
-4. Wait for GitHub Pages to publish the site.
-5. Visit the URLs shown by GitHub Pages:
-   - /FinancialHealthDashboard/dashboard.html
-   - /HRAnalytics/dashboard.html
-   - /RealEstateMarketTrends/dashboard.html
-   - /EducationalPerformance/dashboard.html
+Previews include:
+- index.html
+- FinancialHealthDashboard/dashboard.html, balance_sheet.html, cash_flow.html
+- HRAnalytics/dashboard.html, hiring_forecast.html
+- RealEstateMarketTrends/dashboard.html, geographic_hotspots.html
+- EducationalPerformance/dashboard.html, resource_allocation.html
 
-If Pages is not enabled, the source files can still be reviewed directly in GitHub, but the interactive previews may not run from the source-code view.
+If Pages is not enabled in repository settings, the interactive previews are not hosted even though their source files remain public.

@@ -1,28 +1,32 @@
-# Project Completion Status
+# End-to-end status against the supplied CodeAlpha PDF
 
 Repository: https://github.com/harikrishna399/code-alpha-
 
-## Available in this repository
+## Deliverables
 
-- Four project folders with synthetic CSV data, DAX reference measures, Power Query notes, layout specifications, and project READMEs.
-- Four browser-based companion previews at each project's dashboard.html.
-- Shared dashboard.js and dashboard.css assets for responsive rendering, summary cards, category charts, and searchable data tables.
-- scripts/validate_data.py for structural checks of the CSV datasets.
-- LINKEDIN_DEMO_SCRIPT.md for an honest project demo narration and publishing checklist.
+| PDF requirement | Source work provided | Status |
+|---|---|---|
+| Task 1: income statement, balance sheet, cash flow, profitability trends, budgeting/forecasting | Separate financial statement CSVs, DAX measures, PBIP/TMDL/PBIR source, and browser overview/balance-sheet/cash-flow pages | Source prepared; Power BI Desktop validation and PBIX export pending |
+| Task 2: recruitment metrics, employee turnover, satisfaction/performance, predictive hiring needs | Employee sample, 24 months of synthetic monthly department history, six-month planning scenario, DAX measures, PBIP source and browser previews | Source prepared; scenario is illustrative, not a validated prediction; Desktop validation/PBIX export pending |
+| Task 3: property prices/rental yields, supply/demand/economic indicators, geographic hotspots | 72 synthetic neighborhood-month observations with approximate coordinates, yield/DAX measures, PBIP source with map visual, browser coordinate plot | Source prepared; values are synthetic; Desktop map rendering/PBIX export pending |
+| Task 4: academic performance and resource usage/gaps | Student sample, department resource allocation table, DAX measures, PBIP source and browser previews | Source prepared; Desktop validation/PBIX export pending |
+| Upload source code to GitHub | CSVs, DAX, Power Query/layout notes, browser source, PBIP/TMDL/PBIR source, validators and workflow | Pushed |
+| LinkedIn status tagging @CodeAlpha | Instructions and suggested copy provided in LINKEDIN_DEMO_SCRIPT.md | External account action required |
+| LinkedIn video with repository link | Narration and recording checklist provided | Video still needs to be recorded and published from your account |
+| Submit via internship form | PDF states the link is shared in the WhatsApp group, but no form URL is printed in the PDF | Must obtain the official URL and submit there |
 
-## Still required for an authentic Power BI submission
+## Power BI validation boundary
 
-- [ ] Open each dataset in Power BI Desktop and confirm data types.
-- [ ] Implement and validate the DAX measures in Power BI Desktop.
-- [ ] Create the visuals and report pages described in each layout guide.
-- [ ] Add missing source data where the brief requires it (notably full balance-sheet and cash-flow data for finance).
-- [ ] Validate the report interactions and calculations.
-- [ ] Save and push the native PBIX report files.
-- [ ] Record and publish the LinkedIn video.
-- [ ] Submit the final repository/video links through the official submission form.
+The repository contains PBIP source projects, not binary .pbix files. Local scripts validate CSV structure/arithmetic, JSON syntax, TMDL table declarations and embedded source data. They cannot replace opening each project in Power BI Desktop, checking compatibility, refreshing, visually validating pages/interactions and saving the native report.
 
-## Limitations
+## Final Desktop checklist for each of the four projects
 
-This repository does not claim that the native Power BI reports or external submission steps are complete. A valid PBIX file must be created and saved in Power BI Desktop; the browser previews are companion demos, not replacements for Power BI deliverables.
+- Open the project PBIP in Power BI Desktop and resolve compatibility/schema warnings.
+- Confirm every model table loads; validate DAX measures, field bindings, formats, relationships, slicers and cross-filtering.
+- Finance: check net income, balance-sheet equation and cash-flow roll-forward; inspect monthly trend and variance charts.
+- HR: distinguish Actual vs Scenario Forecast; validate turnover definition and avoid claiming a trained model where there is none.
+- Real estate: verify the map renders and latitude/longitude are interpreted correctly; keep the synthetic-data caveat visible.
+- Education: test department/term filters and inspect resource-gap measure interpretations.
+- Save a PBIX per task, commit/push the file, then record/post the LinkedIn video and submit the official form.
 
-The datasets are synthetic. The HR sample is too small and lacks sufficient time-series history for reliable predictive hiring. The real-estate sample is illustrative, not live market data, and lacks map coordinates. The education data is synthetic and should not be used to make decisions about real students.
+All data are synthetic and intended for learning/portfolio demonstration only.

@@ -1,53 +1,22 @@
-# Human Resources Analytics Dashboard
+# Human Resources Analytics
 
 ## Objective
-Analyze workforce composition, recruitment sources, employee exits, performance, satisfaction, and training.
+Analyze recruitment funnel, exits, turnover, satisfaction, performance, training and hiring needs.
 
-## Files
-- `hr_employee_data.csv`: synthetic employee-level sample dataset.
-- `DAX_Measures.dax`: starter measures for workforce KPIs.
+## Data files
+- hr_employee_data.csv: 20 synthetic employee sample records.
+- hr_monthly_metrics.csv: 24 months of synthetic actual monthly data for five departments plus six months of 2026 scenario rows.
+- DAX_Measures.dax: reference measures.
+- dashboard_layout.md: suggested report pages.
+- dashboard.html and hiring_forecast.html: supplementary browser previews.
 
-## Import and prepare
-1. Power BI Desktop → **Get data → Text/CSV** → select `hr_employee_data.csv`.
-2. Rename the table to `hr_employee_data` or adjust the DAX table name.
-3. Set `HireDate` and `ExitDate` to Date types; keep blank exit dates as null.
-4. Set salary to Currency/Decimal and satisfaction to Decimal.
-5. For a date analysis, create a Date table and relate it to HireDate. If analyzing ExitDate too, create an inactive relationship or a second role-playing date table.
+## PBIP source
+Open ../PowerBIProjects/HRAnalytics/HRAnalytics.pbip in Power BI Desktop.
 
-## Suggested report pages
-### Page 1 — Workforce Overview
-- KPI cards: Total Employees, Active Employees, Exited Employees, Average Satisfaction.
-- Bar chart: Active employees by Department.
-- Donut chart: Employment Status.
-- Slicers: Department, Location, Job Role.
+## Report pages
+1. Workforce Overview: hires/exits, turnover, recruitment funnel, satisfaction/performance.
+2. Recruitment & Hiring Scenario: projected hiring needs, applications/offers, time-to-fill and employee sample.
 
-### Page 2 — Recruitment & Attrition
-- Hires by month/year and Recruitment Source.
-- Exits by year and department.
-- Table of exited employees for authorized HR users only.
-- Clearly label the current exit share as a sample-data metric, not a formal turnover rate.
-
-### Page 3 — Performance & Engagement
-- Average Performance Rating by Department.
-- Average Satisfaction by Department.
-- Training Hours vs Performance Rating scatter chart.
-- Salary distribution by role (avoid exposing individual compensation in public reports).
-
-## Business questions
-- Which recruitment sources appear most frequently in the sample?
-- Which departments have the most listed exits?
-- How do satisfaction and performance differ by department?
-- Is training associated with higher performance in this small sample?
-
-## Forecasting limitation
-The brief asks for predictive hiring analytics. This starter dataset is too small and lacks monthly requisitions, applications, time-to-fill, planned headcount, and historical workforce snapshots. A credible hiring forecast should use those additional fields and a time-series or scenario model; do not present a forecast as validated from this sample alone.
-
-## Privacy
-All records are synthetic. For real HR data, restrict access, aggregate results where possible, and do not publish personally identifiable or sensitive employee information.
-
-## Validation checklist
-- Verify active/exited counts against the CSV.
-- Check blanks in ExitDate are treated as null.
-- Confirm date and department slicers work.
-- Apply appropriate privacy permissions.
-- Save the finished report as `HRAnalytics.pbix` in this folder.
+## Definitions and limits
+Monthly turnover is exits / average opening and closing headcount. ForecastHires is an illustrative scenario that approaches the planned headcount after estimated exits. It is not a fitted predictive model. A defensible forecast needs validated historical headcounts, requisition/applicant funnel, time-to-fill, hiring plans and seasonality. Filter RecordType when comparing actual and forecast periods.
+All data are synthetic; protect personal data in real HR reports. Validate the Power BI source in Desktop and save a PBIX when successful.

@@ -1,4 +1,4 @@
-name: Validate sample datasets
+name: Validate CodeAlpha Power BI project sources
 
 on:
   push:
@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  validate-csv:
+  validate-data-and-pbip:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -20,5 +20,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate CSV structure and basic ranges
+      - name: Validate datasets and financial arithmetic
         run: python scripts/validate_data.py
+      - name: Validate Power BI project source structure
+        run: python scripts/validate_powerbi_projects.py

@@ -1,54 +1,30 @@
 # Financial Health Dashboard
 
 ## Objective
-Analyze revenue, expenses, profitability, cash position, and budget variance over time.
+Analyze income-statement performance, balance-sheet position, cash-flow movements, profitability and budget variance.
 
-## Files
-- `financial_data.csv`: synthetic monthly sample data for Jan 2025–Jun 2026.
-- `DAX_Measures.dax`: starter measures for KPIs and budget variance.
+## Data files
+- financial_data.csv: original small departmental sample retained for reference.
+- income_statement_data.csv: 18 monthly synthetic income-statement periods from Jan 2025 to Jun 2026.
+- balance_sheet_data.csv: monthly synthetic assets, liabilities and equity.
+- cash_flow_data.csv: monthly operating, investing and financing cash flows.
+- DAX_Measures.dax: reference measures.
+- dashboard_layout.md: suggested pages.
+- dashboard.html, balance_sheet.html and cash_flow.html: supplementary browser previews.
 
-## Import and model
-1. Power BI Desktop → **Get data → Text/CSV** → select `financial_data.csv`.
-2. Confirm `Date` is Date type and financial columns are Whole Number or Decimal Number.
-3. Rename the imported table to `financial_data` (or update DAX names to match your table).
-4. Create a Date table using **Modeling → New table**:
+## PBIP source
+Open ../PowerBIProjects/FinancialHealth/FinancialHealth.pbip in a recent Power BI Desktop version. Dataset content is embedded in the Power Query M partitions to avoid local source paths.
 
-```dax
-Date = CALENDAR(MIN(financial_data[Date]), MAX(financial_data[Date]))
-```
+## Report pages
+1. Executive Overview: revenue, net profit, margin, closing cash, revenue/profit trends, actual vs budget.
+2. Balance Sheet & Cash Flow: assets vs liabilities, cash-flow trend, reconciliation detail.
+3. Recommended extension: expense analysis and budget variance by month/category.
 
-5. Add a relationship from `Date[Date]` to `financial_data[Date]` and mark the Date table as a date table.
+## Structural validation
+- NetIncome = Revenue - TotalExpenses.
+- BalanceCheck = TotalAssets - TotalLiabilitiesAndEquity = 0.
+- NetCashFlow = OperatingCashFlow + InvestingCashFlow + FinancingCashFlow.
+- ClosingCash = OpeningCash + NetCashFlow.
 
-## Suggested report pages
-### Page 1 — Executive Overview
-- KPI cards: Total Revenue, Total Expenses, Net Profit, Profit Margin %.
-- Line chart: Revenue and Net Profit by month.
-- Clustered column chart: Actual Revenue vs Revenue Budget.
-- Bar chart: Net Profit by Department.
-- Slicers: Date, Department.
-
-### Page 2 — Cost & Budget Analysis
-- Actual vs budget expenses by month.
-- Expense breakdown by Operating Expenses and Other Expenses.
-- Variance cards and a table by month/department.
-
-### Page 3 — Cash Position
-- Opening and closing cash trend.
-- Table showing each month's opening and closing cash.
-
-## Business questions
-- Is revenue growing over time?
-- Which departments contribute most revenue?
-- Are expenses above budget?
-- Is profit margin improving or declining?
-
-## Data limitations
-This is sample data, not audited financial information. The current dataset is monthly and department-level. It does not contain a full balance sheet or transaction-level cash flow, so do not label the current report as a complete statutory financial statement. For a real balance sheet/cash-flow report, add assets, liabilities, equity, cash receipts, and cash payments at suitable levels of detail.
-
-## Validation checklist
-- Verify totals against the CSV.
-- Check date sorting and data types.
-- Confirm slicers filter every intended visual.
-- Format currency consistently.
-- Test zero/blank values in percentage measures.
-- Save the finished report as `FinancialHealthDashboard.pbix` in this folder.
+## Caveats
+All figures are synthetic. This simplified income statement and illustrative balance sheet are not audited. No source transactions are available to reconcile to a general ledger. Validate all PBIP model measures/visuals in Power BI Desktop, then save a native PBIX file.

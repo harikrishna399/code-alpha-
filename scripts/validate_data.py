@@ -1,114 +1,177 @@
 #!/usr/bin/env python3
-"""Validate the synthetic CSV datasets used by the CodeAlpha project kits.
-
-Run from the repository root: python scripts/validate_data.py
-Uses only Python's standard library. This checks structure and simple data rules;
-it does not validate business accuracy or make sample data production-ready.
-"""
+"""Validate CSV structure, ranges and cross-file financial/HR arithmetic."""
 import csv
+import math
 import sys
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SPECS = {
-    "FinancialHealthDashboard/financial_data.csv": {
-        "required": ["Date", "Department", "Revenue", "OperatingExpenses", "OtherExpenses", "OpeningCash", "ClosingCash", "BudgetRevenue", "BudgetExpenses"],
-        "numeric": ["Revenue", "OperatingExpenses", "OtherExpenses", "OpeningCash", "ClosingCash", "BudgetRevenue", "BudgetExpenses"],
-        "date": "Date",
-    },
-    "HRAnalytics/hr_employee_data.csv": {
-        "required": ["EmployeeID", "Department", "JobRole", "Location", "HireDate", "ExitDate", "EmploymentStatus", "RecruitmentSource", "PerformanceRating", "SatisfactionScore", "TrainingHours", "MonthlySalary"],
-        "numeric": ["PerformanceRating", "SatisfactionScore", "TrainingHours", "MonthlySalary"],
-        "unique": ["EmployeeID"],
-        "date": "HireDate",
-    },
-    "RealEstateMarketTrends/property_market_data.csv": {
-        "required": ["Month", "City", "Neighborhood", "PropertyType", "AverageSalePrice", "AverageMonthlyRent", "Listings", "Transactions", "PopulationIndex", "PolicyRatePct"],
-        "numeric": ["AverageSalePrice", "AverageMonthlyRent", "Listings", "Transactions", "PopulationIndex", "PolicyRatePct"],
-        "date": "Month",
-    },
-    "EducationalPerformance/student_performance.csv": {
-        "required": ["StudentID", "AcademicYear", "Term", "Department", "YearOfStudy", "AttendancePct", "MathScore", "ProgrammingScore", "CommunicationScore", "CreditsAttempted", "CreditsEarned", "LibraryVisits", "LabHours", "SupportFlag"],
-        "numeric": ["AcademicYear", "Term", "YearOfStudy", "AttendancePct", "MathScore", "ProgrammingScore", "CommunicationScore", "CreditsAttempted", "CreditsEarned", "LibraryVisits", "LabHours"],
-        "unique": ["StudentID"],
-    },
-}
 
-def validate(path, spec):
-    errors = []
-    full = ROOT / path
-    if not full.exists():
-        return 0, [f"FILE MISSING: {path}"]
-    with full.open(newline="", encoding="utf-8-sig") as f:
-        reader = csv.DictReader(f)
+def load(rel):
+    path = ROOT / rel
+    if not path.exists():
+        raise AssertionError("Missing file: " + rel)
+    with path.open(newline="", encoding="utf-8-sig") as stream:
+        reader = csv.DictReader(stream)
         headers = reader.fieldnames or []
-        missing = [h for h in spec["required"] if h not in headers]
-        if missing:
-            errors.append("Missing required columns: " + ", ".join(missing))
         rows = list(reader)
-    if not rows:
-        errors.append("Dataset has no data rows")
-    for col in spec.get("numeric", []):
-        if col not in (headers or []):
-            continue
-        for line, row in enumerate(rows, start=2):
-            value = row.get(col, "").strip()
-            try:
-                n = float(value)
-                if not (n == n and abs(n) != float("inf")):
-                    raise ValueError
-            except (TypeError, ValueError):
-                errors.append(f"Line {line}: {col} is not a finite number: {value!r}")
-    for col in spec.get("unique", []):
-        if col not in (headers or []):
-            continue
-        values = [r.get(col, "").strip() for r in rows]
-        duplicates = sorted({v for v in values if v and values.count(v) > 1})
-        if duplicates:
-            errors.append(f"{col} contains duplicate values: {', '.join(duplicates[:10])}")
-    date_col = spec.get("date")
-    if date_col and date_col in (headers or []):
-        from datetime import date
-        for line, row in enumerate(rows, start=2):
-            value = row.get(date_col, "").strip()
-            try:
-                date.fromisoformat(value)
-            except ValueError:
-                errors.append(f"Line {line}: invalid {date_col} ISO date: {value!r}")
-    if "AttendancePct" in (headers or []):
-        for line, row in enumerate(rows, start=2):
-            try:
-                n = float(row["AttendancePct"])
-                if not 0 <= n <= 100:
-                    errors.append(f"Line {line}: AttendancePct outside 0–100")
-            except ValueError:
-                pass
-    for col in ("MathScore", "ProgrammingScore", "CommunicationScore", "PerformanceRating", "SatisfactionScore"):
-        if col not in (headers or []):
-            continue
-        upper = 5 if col in ("PerformanceRating", "SatisfactionScore") else 100
-        for line, row in enumerate(rows, start=2):
-            try:
-                n = float(row[col])
-                if not 0 <= n <= upper:
-                    errors.append(f"Line {line}: {col} outside expected 0–{upper} range")
-            except ValueError:
-                pass
-    return len(rows), errors
+    if not headers or not rows:
+        raise AssertionError(rel + ": missing header or data rows")
+    return headers, rows
+
+def require_columns(rel, headers, required):
+    missing = sorted(set(required) - set(headers))
+    if missing:
+        raise AssertionError(rel + ": missing columns " + ", ".join(missing))
+
+def num(row, col, rel, allow_blank=False):
+    value = (row.get(col) or "").strip()
+    if allow_blank and not value:
+        return None
+    try:
+        out = float(value)
+    except (ValueError, TypeError):
+        raise AssertionError(rel + ": invalid numeric value for " + col + ": " + repr(value))
+    if not math.isfinite(out):
+        raise AssertionError(rel + ": non-finite numeric value for " + col)
+    return out
+
+def date_value(value, rel, field, allow_blank=False):
+    value = (value or "").strip()
+    if allow_blank and not value:
+        return
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        raise AssertionError(rel + ": invalid ISO date in " + field + ": " + repr(value))
+
+def check(rel, required, numeric=(), dates=(), unique=(), optional_numeric=()):
+    headers, rows = load(rel)
+    require_columns(rel, headers, required)
+    for i, row in enumerate(rows, start=2):
+        for field in numeric:
+            num(row, field, rel + ":" + str(i))
+        for field in optional_numeric:
+            num(row, field, rel + ":" + str(i), allow_blank=True)
+        for field, blank_ok in dates:
+            date_value(row.get(field), rel + ":" + str(i), field, blank_ok)
+    for field in unique:
+        values = [row.get(field, "") for row in rows]
+        if len(values) != len(set(values)):
+            raise AssertionError(rel + ": duplicate " + field)
+    return rows
+
+def close(a, b, message):
+    if abs(a - b) > 1:
+        raise AssertionError(message + " (difference " + str(a - b) + ")")
 
 def main():
-    failed = False
-    print("CodeAlpha CSV structural validation")
-    print("=" * 38)
-    for path, spec in SPECS.items():
-        count, errors = validate(path, spec)
-        status = "PASS" if not errors else "FAIL"
-        print(f"{status}: {path} ({count} data rows)")
-        for err in errors:
-            print(f"  - {err}")
-        failed |= bool(errors)
-    print("\nNote: structural checks do not prove that synthetic data is factual or suitable for decisions.")
-    return 1 if failed else 0
+    results = []
+    old_fin = check("FinancialHealthDashboard/financial_data.csv",
+        ["Date","Department","Revenue","OperatingExpenses","OtherExpenses","OpeningCash","ClosingCash","BudgetRevenue","BudgetExpenses"],
+        numeric=["Revenue","OperatingExpenses","OtherExpenses","OpeningCash","ClosingCash","BudgetRevenue","BudgetExpenses"], dates=[("Date", False)])
+    income = check("FinancialHealthDashboard/income_statement_data.csv",
+        ["Date","Revenue","CostOfGoodsSold","OperatingExpenses","OtherExpenses","Depreciation","InterestExpense","IncomeTax","TotalExpenses","NetIncome","BudgetRevenue","BudgetExpenses"],
+        numeric=["Revenue","CostOfGoodsSold","OperatingExpenses","OtherExpenses","Depreciation","InterestExpense","IncomeTax","TotalExpenses","NetIncome","BudgetRevenue","BudgetExpenses"], dates=[("Date", False)])
+    for i, row in enumerate(income, start=2):
+        total = sum(num(row, f, "income_statement_data.csv") for f in ["CostOfGoodsSold","OperatingExpenses","OtherExpenses","Depreciation","InterestExpense","IncomeTax"])
+        close(total, num(row, "TotalExpenses", "income_statement_data.csv"), "income_statement_data.csv row " + str(i) + ": expenses do not tie")
+        close(num(row, "Revenue", "income_statement_data.csv") - total, num(row, "NetIncome", "income_statement_data.csv"), "income_statement_data.csv row " + str(i) + ": net income does not tie")
+    bs = check("FinancialHealthDashboard/balance_sheet_data.csv",
+        ["Date","Cash","AccountsReceivable","Inventory","PropertyPlantEquipment","TotalAssets","AccountsPayable","ShortTermDebt","LongTermDebt","TotalLiabilities","ShareholdersEquity","TotalLiabilitiesAndEquity","BalanceCheck"],
+        numeric=["Cash","AccountsReceivable","Inventory","PropertyPlantEquipment","TotalAssets","AccountsPayable","ShortTermDebt","LongTermDebt","TotalLiabilities","ShareholdersEquity","TotalLiabilitiesAndEquity","BalanceCheck"], dates=[("Date", False)])
+    for i, row in enumerate(bs, start=2):
+        assets = sum(num(row,f,"balance_sheet_data.csv") for f in ["Cash","AccountsReceivable","Inventory","PropertyPlantEquipment"])
+        liabilities = sum(num(row,f,"balance_sheet_data.csv") for f in ["AccountsPayable","ShortTermDebt","LongTermDebt"])
+        close(assets, num(row,"TotalAssets","balance_sheet_data.csv"), "balance sheet assets do not tie on row " + str(i))
+        close(liabilities, num(row,"TotalLiabilities","balance_sheet_data.csv"), "balance sheet liabilities do not tie on row " + str(i))
+        close(assets, num(row,"TotalLiabilitiesAndEquity","balance_sheet_data.csv"), "balance sheet equation does not tie on row " + str(i))
+        close(0, num(row,"BalanceCheck","balance_sheet_data.csv"), "balance check not zero on row " + str(i))
+    cf = check("FinancialHealthDashboard/cash_flow_data.csv",
+        ["Date","OpeningCash","OperatingCashFlow","InvestingCashFlow","FinancingCashFlow","NetCashFlow","ClosingCash"],
+        numeric=["OpeningCash","OperatingCashFlow","InvestingCashFlow","FinancingCashFlow","NetCashFlow","ClosingCash"], dates=[("Date", False)])
+    bs_by_date = {r["Date"]: r for r in bs}
+    for i, row in enumerate(cf, start=2):
+        net = sum(num(row,f,"cash_flow_data.csv") for f in ["OperatingCashFlow","InvestingCashFlow","FinancingCashFlow"])
+        close(net, num(row,"NetCashFlow","cash_flow_data.csv"), "cash-flow net does not tie on row " + str(i))
+        close(num(row,"OpeningCash","cash_flow_data.csv") + net, num(row,"ClosingCash","cash_flow_data.csv"), "cash roll-forward does not tie on row " + str(i))
+        if row["Date"] in bs_by_date:
+            close(num(row,"ClosingCash","cash_flow_data.csv"), num(bs_by_date[row["Date"]],"Cash","balance_sheet_data.csv"), "cash flow and balance-sheet cash mismatch on " + row["Date"])
+    employees = check("HRAnalytics/hr_employee_data.csv",
+        ["EmployeeID","Department","JobRole","Location","HireDate","ExitDate","EmploymentStatus","RecruitmentSource","PerformanceRating","SatisfactionScore","TrainingHours","MonthlySalary"],
+        numeric=["PerformanceRating","SatisfactionScore","TrainingHours","MonthlySalary"], dates=[("HireDate",False),("ExitDate",True)], unique=["EmployeeID"])
+    for i, row in enumerate(employees, start=2):
+        for field in ["PerformanceRating","SatisfactionScore"]:
+            value = num(row,field,"hr_employee_data.csv")
+            if not 0 <= value <= 5:
+                raise AssertionError("HR " + field + " outside 0–5 on row " + str(i))
+    hr = check("HRAnalytics/hr_monthly_metrics.csv",
+        ["Month","Department","RecordType","OpeningHeadcount","Hires","Exits","ClosingHeadcount","Applications","Offers","Requisitions","AverageTimeToFillDays","PlannedHeadcount","ForecastHires","TurnoverRatePct","SatisfactionScore","PerformanceRating","TrainingHours"],
+        numeric=["OpeningHeadcount","Applications","Offers","Requisitions","AverageTimeToFillDays","PlannedHeadcount"],
+        dates=[("Month",False)],
+        optional_numeric=["Hires","Exits","ClosingHeadcount","ForecastHires","TurnoverRatePct","SatisfactionScore","PerformanceRating","TrainingHours"])
+    actual = forecast = 0
+    for i, row in enumerate(hr, start=2):
+        if row["RecordType"] == "Actual":
+            actual += 1
+            close(num(row,"OpeningHeadcount","hr_monthly_metrics.csv") + num(row,"Hires","hr_monthly_metrics.csv") - num(row,"Exits","hr_monthly_metrics.csv"), num(row,"ClosingHeadcount","hr_monthly_metrics.csv"), "HR headcount arithmetic failed on row " + str(i))
+            turnover = num(row,"TurnoverRatePct","hr_monthly_metrics.csv")
+            if not 0 <= turnover <= 100:
+                raise AssertionError("HR turnover outside 0–100 on row " + str(i))
+        elif row["RecordType"] == "Scenario Forecast":
+            forecast += 1
+            if num(row,"ForecastHires","hr_monthly_metrics.csv") < 0:
+                raise AssertionError("Negative forecast hiring need on row " + str(i))
+        else:
+            raise AssertionError("Unknown HR RecordType on row " + str(i))
+    if not actual or not forecast:
+        raise AssertionError("HR dataset must contain both actual and scenario forecast rows")
+    real_estate = check("RealEstateMarketTrends/property_market_data.csv",
+        ["Month","City","Neighborhood","PropertyType","AverageSalePrice","AverageMonthlyRent","Listings","Transactions","PopulationIndex","PolicyRatePct","Latitude","Longitude","RecordType"],
+        numeric=["AverageSalePrice","AverageMonthlyRent","Listings","Transactions","PopulationIndex","PolicyRatePct","Latitude","Longitude"], dates=[("Month",False)])
+    for i, row in enumerate(real_estate, start=2):
+        if num(row,"AverageSalePrice","property_market_data.csv") <= 0 or num(row,"AverageMonthlyRent","property_market_data.csv") <= 0:
+            raise AssertionError("Non-positive sale price/rent on row " + str(i))
+        lat, lon = num(row,"Latitude","property_market_data.csv"), num(row,"Longitude","property_market_data.csv")
+        if not -90 <= lat <= 90 or not -180 <= lon <= 180:
+            raise AssertionError("Invalid coordinates on row " + str(i))
+    students = check("EducationalPerformance/student_performance.csv",
+        ["StudentID","AcademicYear","Term","Department","YearOfStudy","AttendancePct","MathScore","ProgrammingScore","CommunicationScore","CreditsAttempted","CreditsEarned","LibraryVisits","LabHours","SupportFlag"],
+        numeric=["AcademicYear","Term","YearOfStudy","AttendancePct","MathScore","ProgrammingScore","CommunicationScore","CreditsAttempted","CreditsEarned","LibraryVisits","LabHours"], unique=["StudentID"])
+    for i, row in enumerate(students, start=2):
+        for field in ["AttendancePct","MathScore","ProgrammingScore","CommunicationScore"]:
+            val=num(row,field,"student_performance.csv")
+            if not 0 <= val <= 100:
+                raise AssertionError(field + " outside 0–100 on row " + str(i))
+        if num(row,"CreditsEarned","student_performance.csv") > num(row,"CreditsAttempted","student_performance.csv"):
+            raise AssertionError("CreditsEarned exceeds attempted on row " + str(i))
+    resources = check("EducationalPerformance/resource_allocation.csv",
+        ["AcademicYear","Term","Department","StudentCount","FacultyCount","FacultyRecommended","LabCapacityHours","LabHoursUsed","LabUtilizationPct","LibraryVisits","LibraryVisitsCapacity","LibraryUtilizationPct","TutorHoursAvailable","TutorHoursRecommended","TutorHourGap","SupportFlagCount","ResourceGapScore"],
+        numeric=["AcademicYear","Term","StudentCount","FacultyCount","FacultyRecommended","LabCapacityHours","LabHoursUsed","LabUtilizationPct","LibraryVisits","LibraryVisitsCapacity","LibraryUtilizationPct","TutorHoursAvailable","TutorHoursRecommended","TutorHourGap","SupportFlagCount","ResourceGapScore"])
+    for i, row in enumerate(resources, start=2):
+        if num(row,"TutorHourGap","resource_allocation.csv") < 0:
+            raise AssertionError("Negative tutor-hours gap on row " + str(i))
+        if num(row,"LabUtilizationPct","resource_allocation.csv") < 0:
+            raise AssertionError("Negative lab utilization on row " + str(i))
+    checks = [
+        ("financial_data.csv", len(old_fin)), ("income_statement_data.csv", len(income)),
+        ("balance_sheet_data.csv", len(bs)), ("cash_flow_data.csv", len(cf)),
+        ("hr_employee_data.csv", len(employees)), ("hr_monthly_metrics.csv", len(hr)),
+        ("property_market_data.csv", len(real_estate)), ("student_performance.csv", len(students)),
+        ("resource_allocation.csv", len(resources))
+    ]
+    print("CodeAlpha dataset validation: PASS")
+    for label, count in checks:
+        print("  PASS " + label + ": " + str(count) + " rows")
+    print("  PASS HR status split: " + str(actual) + " actual rows, " + str(forecast) + " scenario forecast rows")
+    print("  PASS financial statement arithmetic and cash-flow roll-forward")
+    print("Reminder: structural/arithmetic validation does not make synthetic data factual.")
+    return 0
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except AssertionError as exc:
+        print("FAIL: " + str(exc), file=sys.stderr)
+        sys.exit(1)
