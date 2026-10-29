@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000016",
+  "position": {
+    "x": 650,
+    "y": 150,
+    "z": 10,
+    "width": 600,
+    "height": 280,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DepartmentTable"
+                    }
+                  },
+                  "Property": "Department"
+                }
+              },
+              "queryRef": "DepartmentTable.Department",
+              "nativeQueryRef": "Department"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "student_performance"
+                    }
+                  },
+                  "Property": "Average Attendance %"
+                }
+              },
+              "queryRef": "student_performance.Average Attendance %",
+              "nativeQueryRef": "Average Attendance %"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

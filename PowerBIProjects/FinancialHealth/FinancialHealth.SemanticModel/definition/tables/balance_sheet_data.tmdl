@@ -1,0 +1,88 @@
+table balance_sheet_data
+	measure 'Total Assets' = SUM(balance_sheet_data[TotalAssets])
+		formatString: ₹ #,##0
+
+	measure 'Total Liabilities' = SUM(balance_sheet_data[TotalLiabilities])
+		formatString: ₹ #,##0
+
+	measure 'Shareholders Equity' = SUM(balance_sheet_data[ShareholdersEquity])
+		formatString: ₹ #,##0
+
+	measure 'Balance Check' = SUM(balance_sheet_data[BalanceCheck])
+		formatString: ₹ #,##0
+
+	column Date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: Date
+		formatString: yyyy-mm-dd
+
+	column Cash
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Cash
+
+	column AccountsReceivable
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: AccountsReceivable
+
+	column Inventory
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Inventory
+
+	column PropertyPlantEquipment
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: PropertyPlantEquipment
+
+	column TotalAssets
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TotalAssets
+
+	column AccountsPayable
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: AccountsPayable
+
+	column ShortTermDebt
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: ShortTermDebt
+
+	column LongTermDebt
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LongTermDebt
+
+	column TotalLiabilities
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TotalLiabilities
+
+	column ShareholdersEquity
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: ShareholdersEquity
+
+	column TotalLiabilitiesAndEquity
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TotalLiabilitiesAndEquity
+
+	column BalanceCheck
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: BalanceCheck
+
+	partition balance_sheet_data = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("RGF0ZSxDYXNoLEFjY291bnRzUmVjZWl2YWJsZSxJbnZlbnRvcnksUHJvcGVydHlQbGFudEVxdWlwbWVudCxUb3RhbEFzc2V0cyxBY2NvdW50c1BheWFibGUsU2hvcnRUZXJtRGVidCxMb25nVGVybURlYnQsVG90YWxMaWFiaWxpdGllcyxTaGFyZWhvbGRlcnNFcXVpdHksVG90YWxMaWFiaWxpdGllc0FuZEVxdWl0eSxCYWxhbmNlQ2hlY2sKMjAyNS0wMS0wMSw2ODU0OTIsMTEyNzUwLDE2MTYwMCwxMTYxMDQwLDIxMjA4ODIsNDY3ODAsMTc4NDAwLDYxNTgwMCw4NDA5ODAsMTI3OTkwMiwyMTIwODgyLDAKMjAyNS0wMi0wMSw3NTc1MDYsMTE1NTY5LDE2MzIxNiwxMTcxOTUwLDIyMDgyNDEsNDg1MjksMTc2ODAwLDYxMTYwMCw4MzY5MjksMTM3MTMxMiwyMjA4MjQxLDAKMjAyNS0wMy0wMSw4MjMzNTAsMTE4NDU4LDE2NDg0OCwxMTgyNzMxLDIyODkzODcsNDg3NzMsMTc1MjAwLDYwNzQwMCw4MzEzNzMsMTQ1ODAxNCwyMjg5Mzg3LDAKMjAyNS0wNC0wMSw5MDE1OTUsMTIxNDE5LDE2NjQ5NiwxMTkzMzgyLDIzODI4OTIsNTEyODYsMTczNjAwLDYwMzIwMCw4MjgwODYsMTU1NDgwNiwyMzgyODkyLDAKMjAyNS0wNS0wMSw5ODIwNzgsMTI0NDU0LDE2ODE2MSwxMjAzOTA0LDI0Nzg1OTcsNTA5ODQsMTcyMDAwLDU5OTAwMCw4MjE5ODQsMTY1NjYxMywyNDc4NTk3LDAKMjAyNS0wNi0wMSwxMDYwMzUwLDEyNzU2NSwxNjk4NDMsMTIxNDI5NiwyNTcyMDU0LDUxNzI5LDE3MDQwMCw1OTQ4MDAsODE2OTI5LDE3NTUxMjUsMjU3MjA1NCwwCjIwMjUtMDctMDEsMTE0MTkzNiwxMzA3NTQsMTcxNTQxLDEyMjQ1NTgsMjY2ODc4OSw1MzE0NywxNjg4MDAsNTkwNjAwLDgxMjU0NywxODU2MjQyLDI2Njg3ODksMAoyMDI1LTA4LTAxLDEyMjk3NzIsMTM0MDIzLDE3MzI1NiwxMjM0NjkxLDI3NzE3NDIsNTQ5NDgsMTY3MjAwLDU4NjQwMCw4MDg1NDgsMTk2MzE5NCwyNzcxNzQyLDAKMjAyNS0wOS0wMSwxMzE2NTY1LDEzNzM3NCwxNzQ5ODksMTI0NDY5NCwyODczNjIyLDU0MTY4LDE2NTYwMCw1ODIyMDAsODAxOTY4LDIwNzE2NTQsMjg3MzYyMiwwCjIwMjUtMTAtMDEsMTQxNTc0MSwxNDA4MDgsMTc2NzM5LDEyNTQ1NjgsMjk4Nzg1Niw1NjY4MiwxNjQwMDAsNTc4MDAwLDc5ODY4MiwyMTg5MTc0LDI5ODc4NTYsMAoyMDI1LTExLTAxLDE1MTIwMjcsMTQ0MzI4LDE3ODUwNiwxMjY0MzEyLDMwOTkxNzMsNTczOTksMTYyNDAwLDU3MzgwMCw3OTM1OTksMjMwNTU3NCwzMDk5MTczLDAKMjAyNS0xMi0wMSwxNjA1OTExLDE0NzkzNiwxODAyOTEsMTI3MzkyNiwzMjA4MDY0LDU4MTc5LDE2MDgwMCw1Njk2MDAsNzg4NTc5LDI0MTk0ODUsMzIwODA2NCwwCjIwMjYtMDEtMDEsMTcwODY0NSwxNTE2MzQsMTgyMDk0LDEyODM0MTEsMzMyNTc4NCw1ODQ5MiwxNTkyMDAsNTY1NDAwLDc4MzA5MiwyNTQyNjkyLDMzMjU3ODQsMAoyMDI2LTAyLTAxLDE4MTc1NTEsMTU1NDI1LDE4MzkxNSwxMjkyNzY2LDM0NDk2NTcsNjAzMDUsMTU3NjAwLDU2MTIwMCw3NzkxMDUsMjY3MDU1MiwzNDQ5NjU3LDAKMjAyNi0wMy0wMSwxOTE5OTAxLDE1OTMxMSwxODU3NTQsMTMwMTk5MiwzNTY2OTU4LDYwNjE0LDE1NjAwMCw1NTcwMDAsNzczNjE0LDI3OTMzNDQsMzU2Njk1OCwwCjIwMjYtMDQtMDEsMjAzNDE3MywxNjMyOTQsMTg3NjEyLDEzMTEwODgsMzY5NjE2Nyw2MzE5MiwxNTQ0MDAsNTUyODAwLDc3MDM5MiwyOTI1Nzc1LDM2OTYxNjcsMAoyMDI2LTA1LTAxLDIxNTE0OTksMTY3Mzc2LDE4OTQ4OCwxMzIwMDU0LDM4Mjg0MTcsNjI2OTYsMTUyODAwLDU0ODYwMCw3NjQwOTYsMzA2NDMyMSwzODI4NDE3LDAKMjAyNi0wNi0wMSwyMjY2MTMxLDE3MTU2MCwxOTEzODMsMTMyODg5MSwzOTU3OTY1LDYzNTA1LDE1MTIwMCw1NDQ0MDAsNzU5MTA1LDMxOTg4NjAsMzk1Nzk2NSww", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"Date", type date}, {"Cash", Int64.Type}, {"AccountsReceivable", Int64.Type}, {"Inventory", Int64.Type}, {"PropertyPlantEquipment", Int64.Type}, {"TotalAssets", Int64.Type}, {"AccountsPayable", Int64.Type}, {"ShortTermDebt", Int64.Type}, {"LongTermDebt", Int64.Type}, {"TotalLiabilities", Int64.Type}, {"ShareholdersEquity", Int64.Type}, {"TotalLiabilitiesAndEquity", Int64.Type}, {"BalanceCheck", Int64.Type}}, "en-US")
+			in
+				#"Changed Type"

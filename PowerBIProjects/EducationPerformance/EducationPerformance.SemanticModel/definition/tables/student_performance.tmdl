@@ -1,0 +1,110 @@
+table student_performance
+	measure 'Student Count' = DISTINCTCOUNT(student_performance[StudentID])
+		formatString: #,##0
+
+	measure 'Average Attendance %' = DIVIDE(AVERAGE(student_performance[AttendancePct]), 100, 0)
+		formatString: 0.0%
+
+	measure 'Average Math Score' = AVERAGE(student_performance[MathScore])
+		formatString: 0.0
+
+	measure 'Average Programming Score' = AVERAGE(student_performance[ProgrammingScore])
+		formatString: 0.0
+
+	measure 'Average Communication Score' = AVERAGE(student_performance[CommunicationScore])
+		formatString: 0.0
+
+	measure 'Average Overall Score' = DIVIDE([Average Math Score] + [Average Programming Score] + [Average Communication Score], 3, 0)
+		formatString: 0.0
+
+	measure 'Credits Attempted' = SUM(student_performance[CreditsAttempted])
+		formatString: #,##0
+
+	measure 'Credits Earned' = SUM(student_performance[CreditsEarned])
+		formatString: #,##0
+
+	measure 'Credit Completion %' = DIVIDE([Credits Earned], [Credits Attempted], 0)
+		formatString: 0.0%
+
+	measure 'Students Requiring Support' = CALCULATE(DISTINCTCOUNT(student_performance[StudentID]), student_performance[SupportFlag] = "Yes")
+		formatString: #,##0
+
+	column StudentID
+		dataType: string
+		summarizeBy: none
+		sourceColumn: StudentID
+
+	column AcademicYear
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: AcademicYear
+
+	column Term
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Term
+
+	column Department
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Department
+
+	column YearOfStudy
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: YearOfStudy
+
+	column AttendancePct
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: AttendancePct
+
+	column MathScore
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: MathScore
+
+	column ProgrammingScore
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: ProgrammingScore
+
+	column CommunicationScore
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: CommunicationScore
+
+	column CreditsAttempted
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: CreditsAttempted
+
+	column CreditsEarned
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: CreditsEarned
+
+	column LibraryVisits
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LibraryVisits
+
+	column LabHours
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LabHours
+
+	column SupportFlag
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SupportFlag
+
+	partition student_performance = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("U3R1ZGVudElELEFjYWRlbWljWWVhcixUZXJtLERlcGFydG1lbnQsWWVhck9mU3R1ZHksQXR0ZW5kYW5jZVBjdCxNYXRoU2NvcmUsUHJvZ3JhbW1pbmdTY29yZSxDb21tdW5pY2F0aW9uU2NvcmUsQ3JlZGl0c0F0dGVtcHRlZCxDcmVkaXRzRWFybmVkLExpYnJhcnlWaXNpdHMsTGFiSG91cnMsU3VwcG9ydEZsYWcKUzAwMSwyMDI1LDEsQ1NFLDMsOTIsODQsODgsNzksMjQsMjQsMTIsMzAsTm8KUzAwMiwyMDI1LDEsQ1NFLDMsNzYsNjgsNzIsNzQsMjQsMjEsNiwyNCxObwpTMDAzLDIwMjUsMSxFQ0UsMyw4OCw3OCw3NSw4MSwyNCwyNCwxMCwyNixObwpTMDA0LDIwMjUsMSxFRUUsMyw2NCw1NSw2MCw2NiwyNCwxOCwzLDE4LFllcwpTMDA1LDIwMjUsMSxJVCwzLDk1LDkxLDkzLDg4LDI0LDI0LDE1LDM0LE5vClMwMDYsMjAyNSwxLE1FQ0gsMyw3Miw2Myw1OCw3MCwyNCwyMCw1LDIwLE5vClMwMDcsMjAyNSwxLENJVklMLDMsODEsNzAsNjIsNzMsMjQsMjIsNywyMSxObwpTMDA4LDIwMjUsMSxDU0UsMyw1OCw0OSw1NCw2MCwyNCwxNSwyLDEyLFllcwpTMDA5LDIwMjUsMSxFQ0UsMyw5MCw4Miw4MCw4NSwyNCwyNCwxMSwyOCxObwpTMDEwLDIwMjUsMSxJVCwzLDg2LDc5LDg3LDgyLDI0LDIzLDksMjksTm8KUzAxMSwyMDI1LDIsQ1NFLDMsOTQsODcsOTEsODIsMjQsMjQsMTMsMzIsTm8KUzAxMiwyMDI1LDIsQ1NFLDMsNzAsNjIsNjYsNzEsMjQsMTksNSwyMCxObwpTMDEzLDIwMjUsMixFQ0UsMyw4NSw3Niw3Myw4MCwyNCwyMiw4LDI1LE5vClMwMTQsMjAyNSwyLEVFRSwzLDYxLDUyLDU3LDY0LDI0LDE2LDIsMTUsWWVzClMwMTUsMjAyNSwyLElULDMsOTYsOTMsOTUsOTAsMjQsMjQsMTYsMzYsTm8KUzAxNiwyMDI1LDIsTUVDSCwzLDc0LDY2LDYxLDcyLDI0LDIxLDYsMjIsTm8KUzAxNywyMDI1LDIsQ0lWSUwsMyw4Myw3Miw2NSw3NSwyNCwyMyw4LDIzLE5vClMwMTgsMjAyNSwyLENTRSwzLDYwLDUxLDU2LDYyLDI0LDE2LDMsMTMsWWVzClMwMTksMjAyNSwyLEVDRSwzLDkxLDg0LDgyLDg2LDI0LDI0LDEyLDI5LE5vClMwMjAsMjAyNSwyLElULDMsODksODIsODksODQsMjQsMjQsMTAsMzEsTm8KUzAyMSwyMDI1LDEsQ1NFLDQsODcsODAsODUsODMsMjIsMjIsMTEsMjgsTm8KUzAyMiwyMDI1LDEsRUNFLDQsNzgsNjksNjcsNzYsMjIsMjAsNywyMixObwpTMDIzLDIwMjUsMSxFRUUsNCw2Niw1Nyw2MSw2OCwyMiwxNyw0LDE2LFllcwpTMDI0LDIwMjUsMSxJVCw0LDkzLDg5LDkyLDg3LDIyLDIyLDE0LDMzLE5vClMwMjUsMjAyNSwxLE1FQ0gsNCw3NSw2NSw2MCw3MSwyMiwxOSw2LDIxLE5vClMwMjYsMjAyNSwxLENJVklMLDQsODAsNzEsNjQsNzQsMjIsMjEsNywyMixObwpTMDI3LDIwMjUsMSxDU0UsNCw1Nyw0OCw1Myw1OSwyMiwxNCwyLDExLFllcwpTMDI4LDIwMjUsMSxFQ0UsNCw4OSw4MSw3OSw4NCwyMiwyMiwxMCwyNyxObwpTMDI5LDIwMjUsMSxJVCw0LDkxLDg1LDkwLDg2LDIyLDIyLDEyLDMyLE5vClMwMzAsMjAyNSwyLENTRSw0LDkwLDg0LDg5LDg1LDIyLDIyLDEyLDMwLE5vClMwMzEsMjAyNSwyLEVDRSw0LDgwLDcxLDY5LDc4LDIyLDIxLDgsMjMsTm8KUzAzMiwyMDI1LDIsRUVFLDQsNjgsNTksNjMsNzAsMjIsMTgsNSwxNyxZZXMKUzAzMywyMDI1LDIsSVQsNCw5NSw5MSw5NCw4OSwyMiwyMiwxNSwzNSxObwpTMDM0LDIwMjUsMixNRUNILDQsNzcsNjcsNjIsNzMsMjIsMjAsNywyMixObwpTMDM1LDIwMjUsMixDSVZJTCw0LDgyLDczLDY2LDc2LDIyLDIyLDgsMjQsTm8KUzAzNiwyMDI1LDIsQ1NFLDQsNTksNTAsNTUsNjEsMjIsMTUsMywxMixZZXMKUzAzNywyMDI1LDIsRUNFLDQsOTIsODUsODMsODcsMjIsMjIsMTMsMzAsTm8KUzAzOCwyMDI1LDIsSVQsNCw5Miw4Niw5MSw4NywyMiwyMiwxMywzMyxObw==", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"StudentID", type text}, {"AcademicYear", Int64.Type}, {"Term", Int64.Type}, {"Department", type text}, {"YearOfStudy", Int64.Type}, {"AttendancePct", Int64.Type}, {"MathScore", Int64.Type}, {"ProgrammingScore", Int64.Type}, {"CommunicationScore", Int64.Type}, {"CreditsAttempted", Int64.Type}, {"CreditsEarned", Int64.Type}, {"LibraryVisits", Int64.Type}, {"LabHours", Int64.Type}, {"SupportFlag", type text}}, "en-US")
+			in
+				#"Changed Type"

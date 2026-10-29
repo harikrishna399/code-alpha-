@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000013",
+  "position": {
+    "x": 630,
+    "y": 20,
+    "z": 0,
+    "width": 285,
+    "height": 105,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_monthly_metrics"
+                    }
+                  },
+                  "Property": "Employee Turnover Rate %"
+                }
+              },
+              "queryRef": "hr_monthly_metrics.Employee Turnover Rate %",
+              "nativeQueryRef": "Employee Turnover Rate %"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

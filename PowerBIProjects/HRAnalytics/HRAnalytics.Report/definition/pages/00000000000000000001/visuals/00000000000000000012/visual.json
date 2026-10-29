@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000012",
+  "position": {
+    "x": 325,
+    "y": 20,
+    "z": 0,
+    "width": 285,
+    "height": 105,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_monthly_metrics"
+                    }
+                  },
+                  "Property": "Total Exits"
+                }
+              },
+              "queryRef": "hr_monthly_metrics.Total Exits",
+              "nativeQueryRef": "Total Exits"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

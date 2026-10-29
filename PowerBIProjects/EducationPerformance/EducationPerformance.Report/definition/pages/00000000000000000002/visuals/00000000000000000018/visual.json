@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000018",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 10,
+    "width": 600,
+    "height": 300,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DepartmentTable"
+                    }
+                  },
+                  "Property": "Department"
+                }
+              },
+              "queryRef": "DepartmentTable.Department",
+              "nativeQueryRef": "Department"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "Lab Utilization %"
+                }
+              },
+              "queryRef": "resource_allocation.Lab Utilization %",
+              "nativeQueryRef": "Lab Utilization %"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

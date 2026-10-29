@@ -1,0 +1,55 @@
+table cash_flow_data
+	measure 'Net Cash Flow' = SUM(cash_flow_data[NetCashFlow])
+		formatString: ₹ #,##0
+
+	measure 'Closing Cash Latest' = CALCULATE(MAX(cash_flow_data[ClosingCash]), LASTDATE(DateTable[Date]))
+		formatString: ₹ #,##0
+
+	measure 'Operating Cash Flow' = SUM(cash_flow_data[OperatingCashFlow])
+		formatString: ₹ #,##0
+
+	column Date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: Date
+		formatString: yyyy-mm-dd
+
+	column OpeningCash
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: OpeningCash
+
+	column OperatingCashFlow
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: OperatingCashFlow
+
+	column InvestingCashFlow
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: InvestingCashFlow
+
+	column FinancingCashFlow
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: FinancingCashFlow
+
+	column NetCashFlow
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: NetCashFlow
+
+	column ClosingCash
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: ClosingCash
+
+	partition cash_flow_data = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("RGF0ZSxPcGVuaW5nQ2FzaCxPcGVyYXRpbmdDYXNoRmxvdyxJbnZlc3RpbmdDYXNoRmxvdyxGaW5hbmNpbmdDYXNoRmxvdyxOZXRDYXNoRmxvdyxDbG9zaW5nQ2FzaAoyMDI1LTAxLTAxLDYyMDAwMCwxMTg0OTIsLTM3MDAwLC0xNjAwMCw2NTQ5Miw2ODU0OTIKMjAyNS0wMi0wMSw2ODU0OTIsMTI1Nzg0LC0zNzU1MCwtMTYyMjAsNzIwMTQsNzU3NTA2CjIwMjUtMDMtMDEsNzU3NTA2LDEyMDM4NCwtMzgxMDAsLTE2NDQwLDY1ODQ0LDgyMzM1MAoyMDI1LTA0LTAxLDgyMzM1MCwxMzM1NTUsLTM4NjUwLC0xNjY2MCw3ODI0NSw5MDE1OTUKMjAyNS0wNS0wMSw5MDE1OTUsMTM2NTYzLC0zOTIwMCwtMTY4ODAsODA0ODMsOTgyMDc4CjIwMjUtMDYtMDEsOTgyMDc4LDEzNTEyMiwtMzk3NTAsLTE3MTAwLDc4MjcyLDEwNjAzNTAKMjAyNS0wNy0wMSwxMDYwMzUwLDEzOTIwNiwtNDAzMDAsLTE3MzIwLDgxNTg2LDExNDE5MzYKMjAyNS0wOC0wMSwxMTQxOTM2LDE0NjIyNiwtNDA4NTAsLTE3NTQwLDg3ODM2LDEyMjk3NzIKMjAyNS0wOS0wMSwxMjI5NzcyLDE0NTk1MywtNDE0MDAsLTE3NzYwLDg2NzkzLDEzMTY1NjUKMjAyNS0xMC0wMSwxMzE2NTY1LDE1OTEwNiwtNDE5NTAsLTE3OTgwLDk5MTc2LDE0MTU3NDEKMjAyNS0xMS0wMSwxNDE1NzQxLDE1Njk4NiwtNDI1MDAsLTE4MjAwLDk2Mjg2LDE1MTIwMjcKMjAyNS0xMi0wMSwxNTEyMDI3LDE1NTM1NCwtNDMwNTAsLTE4NDIwLDkzODg0LDE2MDU5MTEKMjAyNi0wMS0wMSwxNjA1OTExLDE2NDk3NCwtNDM2MDAsLTE4NjQwLDEwMjczNCwxNzA4NjQ1CjIwMjYtMDItMDEsMTcwODY0NSwxNzE5MTYsLTQ0MTUwLC0xODg2MCwxMDg5MDYsMTgxNzU1MQoyMDI2LTAzLTAxLDE4MTc1NTEsMTY2MTMwLC00NDcwMCwtMTkwODAsMTAyMzUwLDE5MTk5MDEKMjAyNi0wNC0wMSwxOTE5OTAxLDE3ODgyMiwtNDUyNTAsLTE5MzAwLDExNDI3MiwyMDM0MTczCjIwMjYtMDUtMDEsMjAzNDE3MywxODI2NDYsLTQ1ODAwLC0xOTUyMCwxMTczMjYsMjE1MTQ5OQoyMDI2LTA2LTAxLDIxNTE0OTksMTgwNzIyLC00NjM1MCwtMTk3NDAsMTE0NjMyLDIyNjYxMzE=", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"Date", type date}, {"OpeningCash", Int64.Type}, {"OperatingCashFlow", Int64.Type}, {"InvestingCashFlow", Int64.Type}, {"FinancingCashFlow", Int64.Type}, {"NetCashFlow", Int64.Type}, {"ClosingCash", Int64.Type}}, "en-US")
+			in
+				#"Changed Type"

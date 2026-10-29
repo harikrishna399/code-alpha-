@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000012",
+  "position": {
+    "x": 325,
+    "y": 20,
+    "z": 0,
+    "width": 285,
+    "height": 105,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "student_performance"
+                    }
+                  },
+                  "Property": "Average Attendance %"
+                }
+              },
+              "queryRef": "student_performance.Average Attendance %",
+              "nativeQueryRef": "Average Attendance %"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

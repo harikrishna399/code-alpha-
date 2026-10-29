@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000020",
+  "position": {
+    "x": 20,
+    "y": 345,
+    "z": 15,
+    "width": 1200,
+    "height": 320,
+    "tabOrder": 15
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DateTable"
+                    }
+                  },
+                  "Property": "YearMonth"
+                }
+              },
+              "queryRef": "DateTable.YearMonth",
+              "nativeQueryRef": "YearMonth"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "balance_sheet_data"
+                    }
+                  },
+                  "Property": "TotalAssets"
+                }
+              },
+              "queryRef": "balance_sheet_data.TotalAssets",
+              "nativeQueryRef": "TotalAssets"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "balance_sheet_data"
+                    }
+                  },
+                  "Property": "TotalLiabilities"
+                }
+              },
+              "queryRef": "balance_sheet_data.TotalLiabilities",
+              "nativeQueryRef": "TotalLiabilities"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "balance_sheet_data"
+                    }
+                  },
+                  "Property": "ShareholdersEquity"
+                }
+              },
+              "queryRef": "balance_sheet_data.ShareholdersEquity",
+              "nativeQueryRef": "ShareholdersEquity"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "balance_sheet_data"
+                    }
+                  },
+                  "Property": "BalanceCheck"
+                }
+              },
+              "queryRef": "balance_sheet_data.BalanceCheck",
+              "nativeQueryRef": "BalanceCheck"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cash_flow_data"
+                    }
+                  },
+                  "Property": "NetCashFlow"
+                }
+              },
+              "queryRef": "cash_flow_data.NetCashFlow",
+              "nativeQueryRef": "NetCashFlow"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

@@ -1,0 +1,3 @@
+relationship 'PropertyMonth'
+	fromColumn: property_market_data.Month
+	toColumn: DateTable.Date

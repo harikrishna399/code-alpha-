@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000018",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 10,
+    "width": 600,
+    "height": 300,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DateTable"
+                    }
+                  },
+                  "Property": "YearMonth"
+                }
+              },
+              "queryRef": "DateTable.YearMonth",
+              "nativeQueryRef": "YearMonth"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "balance_sheet_data"
+                    }
+                  },
+                  "Property": "Total Assets"
+                }
+              },
+              "queryRef": "balance_sheet_data.Total Assets",
+              "nativeQueryRef": "Total Assets"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "balance_sheet_data"
+                    }
+                  },
+                  "Property": "Total Liabilities"
+                }
+              },
+              "queryRef": "balance_sheet_data.Total Liabilities",
+              "nativeQueryRef": "Total Liabilities"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

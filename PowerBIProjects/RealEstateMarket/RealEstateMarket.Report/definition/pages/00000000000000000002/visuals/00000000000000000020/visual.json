@@ -1,0 +1,138 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000020",
+  "position": {
+    "x": 20,
+    "y": 345,
+    "z": 15,
+    "width": 1200,
+    "height": 320,
+    "tabOrder": 15
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "City"
+                }
+              },
+              "queryRef": "property_market_data.City",
+              "nativeQueryRef": "City"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Neighborhood"
+                }
+              },
+              "queryRef": "property_market_data.Neighborhood",
+              "nativeQueryRef": "Neighborhood"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "AverageSalePrice"
+                }
+              },
+              "queryRef": "property_market_data.AverageSalePrice",
+              "nativeQueryRef": "AverageSalePrice"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "AverageMonthlyRent"
+                }
+              },
+              "queryRef": "property_market_data.AverageMonthlyRent",
+              "nativeQueryRef": "AverageMonthlyRent"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Listings"
+                }
+              },
+              "queryRef": "property_market_data.Listings",
+              "nativeQueryRef": "Listings"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Transactions"
+                }
+              },
+              "queryRef": "property_market_data.Transactions",
+              "nativeQueryRef": "Transactions"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Latitude"
+                }
+              },
+              "queryRef": "property_market_data.Latitude",
+              "nativeQueryRef": "Latitude"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Longitude"
+                }
+              },
+              "queryRef": "property_market_data.Longitude",
+              "nativeQueryRef": "Longitude"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

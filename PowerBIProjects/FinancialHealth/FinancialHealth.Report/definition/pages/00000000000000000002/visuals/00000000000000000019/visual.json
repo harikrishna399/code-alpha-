@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000019",
+  "position": {
+    "x": 650,
+    "y": 20,
+    "z": 10,
+    "width": 600,
+    "height": 300,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "DateTable"
+                    }
+                  },
+                  "Property": "YearMonth"
+                }
+              },
+              "queryRef": "DateTable.YearMonth",
+              "nativeQueryRef": "YearMonth"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cash_flow_data"
+                    }
+                  },
+                  "Property": "Operating Cash Flow"
+                }
+              },
+              "queryRef": "cash_flow_data.Operating Cash Flow",
+              "nativeQueryRef": "Operating Cash Flow"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cash_flow_data"
+                    }
+                  },
+                  "Property": "Net Cash Flow"
+                }
+              },
+              "queryRef": "cash_flow_data.Net Cash Flow",
+              "nativeQueryRef": "Net Cash Flow"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

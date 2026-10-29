@@ -1,0 +1,58 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000018",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 10,
+    "width": 600,
+    "height": 300,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "barChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Neighborhood"
+                }
+              },
+              "queryRef": "property_market_data.Neighborhood",
+              "nativeQueryRef": "Neighborhood"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Gross Rental Yield %"
+                }
+              },
+              "queryRef": "property_market_data.Gross Rental Yield %",
+              "nativeQueryRef": "Gross Rental Yield %"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

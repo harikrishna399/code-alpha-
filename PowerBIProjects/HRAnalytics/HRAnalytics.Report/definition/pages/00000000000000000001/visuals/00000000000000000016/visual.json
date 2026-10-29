@@ -1,0 +1,72 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000016",
+  "position": {
+    "x": 650,
+    "y": 150,
+    "z": 10,
+    "width": 600,
+    "height": 280,
+    "tabOrder": 10
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_monthly_metrics"
+                    }
+                  },
+                  "Property": "Department"
+                }
+              },
+              "queryRef": "hr_monthly_metrics.Department",
+              "nativeQueryRef": "Department"
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_monthly_metrics"
+                    }
+                  },
+                  "Property": "Average Satisfaction"
+                }
+              },
+              "queryRef": "hr_monthly_metrics.Average Satisfaction",
+              "nativeQueryRef": "Average Satisfaction"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_monthly_metrics"
+                    }
+                  },
+                  "Property": "Average Performance Rating"
+                }
+              },
+              "queryRef": "hr_monthly_metrics.Average Performance Rating",
+              "nativeQueryRef": "Average Performance Rating"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

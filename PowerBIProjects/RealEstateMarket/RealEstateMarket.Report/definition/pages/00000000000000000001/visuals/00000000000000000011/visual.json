@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000011",
+  "position": {
+    "x": 20,
+    "y": 20,
+    "z": 0,
+    "width": 285,
+    "height": 105,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "property_market_data"
+                    }
+                  },
+                  "Property": "Average Sale Price"
+                }
+              },
+              "queryRef": "property_market_data.Average Sale Price",
+              "nativeQueryRef": "Average Sale Price"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

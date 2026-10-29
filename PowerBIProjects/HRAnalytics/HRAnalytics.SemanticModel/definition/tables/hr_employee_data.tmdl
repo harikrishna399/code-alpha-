@@ -1,0 +1,72 @@
+table hr_employee_data
+	column EmployeeID
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EmployeeID
+
+	column Department
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Department
+
+	column JobRole
+		dataType: string
+		summarizeBy: none
+		sourceColumn: JobRole
+
+	column Location
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Location
+
+	column HireDate
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: HireDate
+		formatString: yyyy-mm-dd
+
+	column ExitDate
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: ExitDate
+		formatString: yyyy-mm-dd
+
+	column EmploymentStatus
+		dataType: string
+		summarizeBy: none
+		sourceColumn: EmploymentStatus
+
+	column RecruitmentSource
+		dataType: string
+		summarizeBy: none
+		sourceColumn: RecruitmentSource
+
+	column PerformanceRating
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: PerformanceRating
+
+	column SatisfactionScore
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: SatisfactionScore
+
+	column TrainingHours
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TrainingHours
+
+	column MonthlySalary
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: MonthlySalary
+
+	partition hr_employee_data = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("RW1wbG95ZWVJRCxEZXBhcnRtZW50LEpvYlJvbGUsTG9jYXRpb24sSGlyZURhdGUsRXhpdERhdGUsRW1wbG95bWVudFN0YXR1cyxSZWNydWl0bWVudFNvdXJjZSxQZXJmb3JtYW5jZVJhdGluZyxTYXRpc2ZhY3Rpb25TY29yZSxUcmFpbmluZ0hvdXJzLE1vbnRobHlTYWxhcnkKRTAwMSxFbmdpbmVlcmluZyxBbmFseXN0LEh5ZGVyYWJhZCwyMDIyLTAxLTEwLCxBY3RpdmUsUmVmZXJyYWwsNCw0LjIsMzIsNjUwMDAKRTAwMixTYWxlcyxFeGVjdXRpdmUsVml6YWcsMjAyMS0wNS0xOCwsQWN0aXZlLEpvYiBQb3J0YWwsMywzLjcsMTgsNDIwMDAKRTAwMyxIUixDb29yZGluYXRvcixIeWRlcmFiYWQsMjAyMy0wMy0wNiwsQWN0aXZlLENhbXB1cyw0LDQuNSwyNiwzOTAwMApFMDA0LE9wZXJhdGlvbnMsU3BlY2lhbGlzdCxWaWpheWF3YWRhLDIwMjAtMTEtMjEsMjAyNS0wNy0xNSxFeGl0ZWQsSm9iIFBvcnRhbCwzLDMuMSwxMiw0NDAwMApFMDA1LEVuZ2luZWVyaW5nLERldmVsb3BlcixIeWRlcmFiYWQsMjAyNC0wMi0xMiwsQWN0aXZlLFJlZmVycmFsLDUsNC42LDQwLDc4MDAwCkUwMDYsU2FsZXMsRXhlY3V0aXZlLFZpemFnLDIwMjItMDgtMDEsMjAyNS0xMC0wMSxFeGl0ZWQsQ2FtcHVzLDIsMi44LDEwLDQwMDAwCkUwMDcsRmluYW5jZSxBY2NvdW50YW50LEh5ZGVyYWJhZCwyMDIxLTA5LTE0LCxBY3RpdmUsSm9iIFBvcnRhbCw0LDQuMSwyNCw1MjAwMApFMDA4LE9wZXJhdGlvbnMsU3BlY2lhbGlzdCxWaWpheWF3YWRhLDIwMjMtMDYtMTksLEFjdGl2ZSxSZWZlcnJhbCwzLDMuOCwyMCw0NjAwMApFMDA5LEVuZ2luZWVyaW5nLEFuYWx5c3QsSHlkZXJhYmFkLDIwMjAtMDQtMjcsMjAyNS0xMi0yMCxFeGl0ZWQsSm9iIFBvcnRhbCw0LDMuNiwyOCw2OTAwMApFMDEwLEhSLFJlY3J1aXRlcixWaXphZywyMDI0LTA3LTA4LCxBY3RpdmUsQ2FtcHVzLDQsNC4zLDMwLDQxMDAwCkUwMTEsRmluYW5jZSxBY2NvdW50YW50LEh5ZGVyYWJhZCwyMDIyLTEyLTA1LCxBY3RpdmUsUmVmZXJyYWwsMywzLjksMjIsNTQwMDAKRTAxMixTYWxlcyxFeGVjdXRpdmUsVmlqYXlhd2FkYSwyMDIzLTAxLTE2LCxBY3RpdmUsSm9iIFBvcnRhbCw0LDQuMCwyNSw0MzAwMApFMDEzLEVuZ2luZWVyaW5nLERldmVsb3BlcixIeWRlcmFiYWQsMjAyMS0wNy0yMiwsQWN0aXZlLFJlZmVycmFsLDUsNC43LDM4LDgwMDAwCkUwMTQsT3BlcmF0aW9ucyxTcGVjaWFsaXN0LFZpemFnLDIwMjItMDQtMTEsMjAyNS0wOC0zMCxFeGl0ZWQsQ2FtcHVzLDIsMi45LDE0LDQ1MDAwCkUwMTUsSFIsQ29vcmRpbmF0b3IsSHlkZXJhYmFkLDIwMjAtMTAtMDIsLEFjdGl2ZSxKb2IgUG9ydGFsLDQsNC4yLDI3LDQwMDAwCkUwMTYsU2FsZXMsRXhlY3V0aXZlLFZpemFnLDIwMjQtMDEtMDksLEFjdGl2ZSxDYW1wdXMsMywzLjYsMTYsNDE1MDAKRTAxNyxGaW5hbmNlLEFuYWx5c3QsSHlkZXJhYmFkLDIwMjMtMDktMjUsLEFjdGl2ZSxSZWZlcnJhbCw0LDQuNCwyOSw1ODAwMApFMDE4LEVuZ2luZWVyaW5nLERldmVsb3BlcixWaWpheWF3YWRhLDIwMjItMDYtMTMsLEFjdGl2ZSxKb2IgUG9ydGFsLDQsNC4wLDM0LDc0MDAwCkUwMTksT3BlcmF0aW9ucyxTcGVjaWFsaXN0LEh5ZGVyYWJhZCwyMDIxLTAyLTE3LCxBY3RpdmUsUmVmZXJyYWwsMywzLjUsMjEsNDcwMDAKRTAyMCxTYWxlcyxFeGVjdXRpdmUsVml6YWcsMjAyMC0wMy0wMywyMDI1LTExLTEwLEV4aXRlZCxKb2IgUG9ydGFsLDIsMi43LDExLDQwNTAw", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"EmployeeID", type text}, {"Department", type text}, {"JobRole", type text}, {"Location", type text}, {"HireDate", type date}, {"ExitDate", type date}, {"EmploymentStatus", type text}, {"RecruitmentSource", type text}, {"PerformanceRating", Int64.Type}, {"SatisfactionScore", type number}, {"TrainingHours", Int64.Type}, {"MonthlySalary", Int64.Type}}, "en-US")
+			in
+				#"Changed Type"

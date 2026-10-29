@@ -1,0 +1,37 @@
+table DateTable
+	column Date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: Date
+		formatString: yyyy-mm-dd
+
+	column Year
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Year
+
+	column MonthNumber
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: MonthNumber
+
+	column MonthName
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MonthName
+		sortByColumn: MonthNumber
+
+	column YearMonth
+		dataType: string
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+	partition DateTable = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("RGF0ZSxZZWFyLE1vbnRoTnVtYmVyLE1vbnRoTmFtZSxZZWFyTW9udGgKMjAyNS0wMS0wMSwyMDI1LDEsSmFuLDIwMjUtMDEKMjAyNS0wMi0wMSwyMDI1LDIsRmViLDIwMjUtMDIKMjAyNS0wMy0wMSwyMDI1LDMsTWFyLDIwMjUtMDMKMjAyNS0wNC0wMSwyMDI1LDQsQXByLDIwMjUtMDQKMjAyNS0wNS0wMSwyMDI1LDUsTWF5LDIwMjUtMDUKMjAyNS0wNi0wMSwyMDI1LDYsSnVuLDIwMjUtMDYKMjAyNS0wNy0wMSwyMDI1LDcsSnVsLDIwMjUtMDcKMjAyNS0wOC0wMSwyMDI1LDgsQXVnLDIwMjUtMDgKMjAyNS0wOS0wMSwyMDI1LDksU2VwLDIwMjUtMDkKMjAyNS0xMC0wMSwyMDI1LDEwLE9jdCwyMDI1LTEwCjIwMjUtMTEtMDEsMjAyNSwxMSxOb3YsMjAyNS0xMQoyMDI1LTEyLTAxLDIwMjUsMTIsRGVjLDIwMjUtMTI=", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"Date", type date}, {"Year", Int64.Type}, {"MonthNumber", Int64.Type}, {"MonthName", type text}, {"YearMonth", type text}}, "en-US")
+			in
+				#"Changed Type"

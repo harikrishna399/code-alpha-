@@ -1,0 +1,3 @@
+relationship 'HRMetricsMonth'
+	fromColumn: hr_monthly_metrics.Month
+	toColumn: DateTable.Date

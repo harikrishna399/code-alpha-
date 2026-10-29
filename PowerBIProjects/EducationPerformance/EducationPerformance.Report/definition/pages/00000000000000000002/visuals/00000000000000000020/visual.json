@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000020",
+  "position": {
+    "x": 20,
+    "y": 345,
+    "z": 15,
+    "width": 1200,
+    "height": 320,
+    "tabOrder": 15
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "Department"
+                }
+              },
+              "queryRef": "resource_allocation.Department",
+              "nativeQueryRef": "Department"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "StudentCount"
+                }
+              },
+              "queryRef": "resource_allocation.StudentCount",
+              "nativeQueryRef": "StudentCount"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "FacultyCount"
+                }
+              },
+              "queryRef": "resource_allocation.FacultyCount",
+              "nativeQueryRef": "FacultyCount"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "FacultyRecommended"
+                }
+              },
+              "queryRef": "resource_allocation.FacultyRecommended",
+              "nativeQueryRef": "FacultyRecommended"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "LabUtilizationPct"
+                }
+              },
+              "queryRef": "resource_allocation.LabUtilizationPct",
+              "nativeQueryRef": "LabUtilizationPct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "LibraryUtilizationPct"
+                }
+              },
+              "queryRef": "resource_allocation.LibraryUtilizationPct",
+              "nativeQueryRef": "LibraryUtilizationPct"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "TutorHourGap"
+                }
+              },
+              "queryRef": "resource_allocation.TutorHourGap",
+              "nativeQueryRef": "TutorHourGap"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "SupportFlagCount"
+                }
+              },
+              "queryRef": "resource_allocation.SupportFlagCount",
+              "nativeQueryRef": "SupportFlagCount"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "resource_allocation"
+                    }
+                  },
+                  "Property": "ResourceGapScore"
+                }
+              },
+              "queryRef": "resource_allocation.ResourceGapScore",
+              "nativeQueryRef": "ResourceGapScore"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

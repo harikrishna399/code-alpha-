@@ -1,0 +1,7 @@
+relationship 'StudentDepartment'
+	fromColumn: student_performance.Department
+	toColumn: DepartmentTable.Department
+
+relationship 'ResourceDepartment'
+	fromColumn: resource_allocation.Department
+	toColumn: DepartmentTable.Department

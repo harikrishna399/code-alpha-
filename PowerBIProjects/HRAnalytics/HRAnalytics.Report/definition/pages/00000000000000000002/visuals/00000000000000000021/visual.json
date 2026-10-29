@@ -1,0 +1,110 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000021",
+  "position": {
+    "x": 650,
+    "y": 345,
+    "z": 15,
+    "width": 600,
+    "height": 300,
+    "tabOrder": 15
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_employee_data"
+                    }
+                  },
+                  "Property": "Department"
+                }
+              },
+              "queryRef": "hr_employee_data.Department",
+              "nativeQueryRef": "Department"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_employee_data"
+                    }
+                  },
+                  "Property": "JobRole"
+                }
+              },
+              "queryRef": "hr_employee_data.JobRole",
+              "nativeQueryRef": "JobRole"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_employee_data"
+                    }
+                  },
+                  "Property": "EmploymentStatus"
+                }
+              },
+              "queryRef": "hr_employee_data.EmploymentStatus",
+              "nativeQueryRef": "EmploymentStatus"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_employee_data"
+                    }
+                  },
+                  "Property": "RecruitmentSource"
+                }
+              },
+              "queryRef": "hr_employee_data.RecruitmentSource",
+              "nativeQueryRef": "RecruitmentSource"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_employee_data"
+                    }
+                  },
+                  "Property": "PerformanceRating"
+                }
+              },
+              "queryRef": "hr_employee_data.PerformanceRating",
+              "nativeQueryRef": "PerformanceRating"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "hr_employee_data"
+                    }
+                  },
+                  "Property": "SatisfactionScore"
+                }
+              },
+              "queryRef": "hr_employee_data.SatisfactionScore",
+              "nativeQueryRef": "SatisfactionScore"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}

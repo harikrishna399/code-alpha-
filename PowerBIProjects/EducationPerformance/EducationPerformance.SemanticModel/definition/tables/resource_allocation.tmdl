@@ -1,0 +1,113 @@
+table resource_allocation
+	measure 'Lab Utilization %' = DIVIDE(SUM(resource_allocation[LabHoursUsed]), SUM(resource_allocation[LabCapacityHours]), 0)
+		formatString: 0.0%
+
+	measure 'Library Utilization %' = DIVIDE(SUM(resource_allocation[LibraryVisits]), SUM(resource_allocation[LibraryVisitsCapacity]), 0)
+		formatString: 0.0%
+
+	measure 'Total Resource Gap Score' = SUM(resource_allocation[ResourceGapScore])
+		formatString: #,##0
+
+	measure 'Faculty Gap' = SUM(resource_allocation[FacultyRecommended]) - SUM(resource_allocation[FacultyCount])
+		formatString: #,##0
+
+	measure 'Tutor Hour Gap' = SUM(resource_allocation[TutorHourGap])
+		formatString: #,##0
+
+	measure 'Students Supported' = SUM(resource_allocation[SupportFlagCount])
+		formatString: #,##0
+
+	column AcademicYear
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: AcademicYear
+
+	column Term
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Term
+
+	column Department
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Department
+
+	column StudentCount
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: StudentCount
+
+	column FacultyCount
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: FacultyCount
+
+	column FacultyRecommended
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: FacultyRecommended
+
+	column LabCapacityHours
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LabCapacityHours
+
+	column LabHoursUsed
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LabHoursUsed
+
+	column LabUtilizationPct
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: LabUtilizationPct
+
+	column LibraryVisits
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LibraryVisits
+
+	column LibraryVisitsCapacity
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: LibraryVisitsCapacity
+
+	column LibraryUtilizationPct
+		dataType: double
+		summarizeBy: sum
+		sourceColumn: LibraryUtilizationPct
+
+	column TutorHoursAvailable
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TutorHoursAvailable
+
+	column TutorHoursRecommended
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TutorHoursRecommended
+
+	column TutorHourGap
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TutorHourGap
+
+	column SupportFlagCount
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: SupportFlagCount
+
+	column ResourceGapScore
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: ResourceGapScore
+
+	partition resource_allocation = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("QWNhZGVtaWNZZWFyLFRlcm0sRGVwYXJ0bWVudCxTdHVkZW50Q291bnQsRmFjdWx0eUNvdW50LEZhY3VsdHlSZWNvbW1lbmRlZCxMYWJDYXBhY2l0eUhvdXJzLExhYkhvdXJzVXNlZCxMYWJVdGlsaXphdGlvblBjdCxMaWJyYXJ5VmlzaXRzLExpYnJhcnlWaXNpdHNDYXBhY2l0eSxMaWJyYXJ5VXRpbGl6YXRpb25QY3QsVHV0b3JIb3Vyc0F2YWlsYWJsZSxUdXRvckhvdXJzUmVjb21tZW5kZWQsVHV0b3JIb3VyR2FwLFN1cHBvcnRGbGFnQ291bnQsUmVzb3VyY2VHYXBTY29yZQoyMDI1LDEsQ1NFLDI2MCwxOCwxNyw5MDAsNzAyLDc4LDE2MjUsMjUwMCw2NSwxMjAsMTA0LDAsMTYsMAoyMDI1LDEsRUNFLDIyMCwxNiwxNCw3ODAsNTYyLDcyLjEsMTM0MiwyMjAwLDYxLDEwMCw4OCwwLDE4LDAKMjAyNSwxLEVFRSwxNjAsMTMsMTAsNTYwLDQ5Myw4OCwxMjI0LDE3MDAsNzIsMTAwLDY0LDAsMTksMgoyMDI1LDEsSVQsMTkwLDE0LDEyLDcyMCw0OTcsNjksMTA3MywxOTUwLDU1LDExMCw3NiwwLDExLDAKMjAyNSwxLE1FQ0gsMTgwLDE1LDEyLDgyMCw2ODEsODMsMTA0NCwxODAwLDU4LDk1LDcyLDAsMTQsMQoyMDI1LDEsQ0lWSUwsMTMwLDExLDksNTAwLDM4MCw3Niw3MDAsMTQwMCw1MCw4MCw1MiwwLDE2LDEKMjAyNSwxLE1CQSwxNDAsMTAsOSwzMDAsMTc0LDU4LDExMTAsMTUwMCw3NCw5MCw1NiwwLDExLDAKMjAyNSwyLENTRSwyNjMsMTgsMTcsOTAwLDczMCw4MS4xLDE3NTUsMjUwMCw3MC4yLDEyMCwxMDYsMCwxNiwwCjIwMjUsMixFQ0UsMjIyLDE2LDE0LDc4MCw1ODQsNzQuOSwxNDQ5LDIyMDAsNjUuOSwxMDAsODksMCwxOCwwCjIwMjUsMixFRUUsMTYyLDEzLDExLDU2MCw1MTMsOTEuNiwxMzIyLDE3MDAsNzcuOCwxMDAsNjUsMCwxOSwzCjIwMjUsMixJVCwxOTIsMTQsMTIsNzIwLDUxNyw3MS44LDExNTgsMTk1MCw1OS40LDExMCw3NywwLDEyLDAKMjAyNSwyLE1FQ0gsMTgyLDE1LDEyLDgyMCw3MDgsODYuMywxMTI4LDE4MDAsNjIuNyw5NSw3MywwLDE1LDIKMjAyNSwyLENJVklMLDEzMSwxMSw5LDUwMCwzOTUsNzksNzU2LDE0MDAsNTQsODAsNTMsMCwxNiwxCjIwMjUsMixNQkEsMTQxLDEwLDksMzAwLDE4MSw2MC4zLDExOTksMTUwMCw3OS45LDkwLDU3LDAsMTEsMA==", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"AcademicYear", Int64.Type}, {"Term", Int64.Type}, {"Department", type text}, {"StudentCount", Int64.Type}, {"FacultyCount", Int64.Type}, {"FacultyRecommended", Int64.Type}, {"LabCapacityHours", Int64.Type}, {"LabHoursUsed", Int64.Type}, {"LabUtilizationPct", type number}, {"LibraryVisits", Int64.Type}, {"LibraryVisitsCapacity", Int64.Type}, {"LibraryUtilizationPct", type number}, {"TutorHoursAvailable", Int64.Type}, {"TutorHoursRecommended", Int64.Type}, {"TutorHourGap", Int64.Type}, {"SupportFlagCount", Int64.Type}, {"ResourceGapScore", Int64.Type}}, "en-US")
+			in
+				#"Changed Type"

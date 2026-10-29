@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "00000000000000000014",
+  "position": {
+    "x": 935,
+    "y": 20,
+    "z": 0,
+    "width": 285,
+    "height": 105,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "cardVisual",
+    "query": {
+      "queryState": {
+        "Data": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "cash_flow_data"
+                    }
+                  },
+                  "Property": "Closing Cash Latest"
+                }
+              },
+              "queryRef": "cash_flow_data.Closing Cash Latest",
+              "nativeQueryRef": "Closing Cash Latest"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {},
+    "visualContainerObjects": {},
+    "drillFilterOtherVisuals": true
+  }
+}
