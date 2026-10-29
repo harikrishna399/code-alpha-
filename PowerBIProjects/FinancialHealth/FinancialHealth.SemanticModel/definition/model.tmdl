@@ -1,0 +1,9 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	discourageImplicitMeasures
+ref table income_statement_data
+ref table balance_sheet_data
+ref table cash_flow_data
+ref table DateTable
