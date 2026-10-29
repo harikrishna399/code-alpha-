@@ -1,0 +1,1 @@
+Import property_market_data.csv. Set Month to Date, prices and rent to numeric currency values, Listings and Transactions to whole numbers. Check duplicate Month + Neighborhood + PropertyType rows, and keep the dataset labelled as synthetic.
