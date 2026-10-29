@@ -1,0 +1,34 @@
+-- Table name assumed: student_performance
+Student Count = DISTINCTCOUNT(student_performance[StudentID])
+
+Average Attendance % = AVERAGE(student_performance[AttendancePct]) / 100
+
+Average Math Score = AVERAGE(student_performance[MathScore])
+
+Average Programming Score = AVERAGE(student_performance[ProgrammingScore])
+
+Average Communication Score = AVERAGE(student_performance[CommunicationScore])
+
+Average Overall Score =
+DIVIDE(
+    [Average Math Score] + [Average Programming Score] + [Average Communication Score],
+    3,
+    0
+)
+
+Credits Attempted = SUM(student_performance[CreditsAttempted])
+
+Credits Earned = SUM(student_performance[CreditsEarned])
+
+Credit Completion % = DIVIDE([Credits Earned], [Credits Attempted], 0)
+
+Students Requiring Support =
+CALCULATE(
+    DISTINCTCOUNT(student_performance[StudentID]),
+    student_performance[SupportFlag] = "Yes"
+)
+
+Support Share % = DIVIDE([Students Requiring Support], [Student Count], 0)
+
+-- These measures are descriptive. A predictive risk model requires larger,
+-- validated longitudinal data and careful review before real student decisions.
