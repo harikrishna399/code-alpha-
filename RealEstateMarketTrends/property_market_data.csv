@@ -1,37 +1,73 @@
-Month,City,Neighborhood,PropertyType,AverageSalePrice,AverageMonthlyRent,Listings,Transactions,PopulationIndex,PolicyRatePct
-2025-01-01,Hyderabad,Gachibowli,Apartment,7800000,32000,180,95,104,6.5
-2025-01-01,Vizag,Madhurawada,Apartment,5100000,21000,130,70,102,6.5
-2025-01-01,Vijayawada,Benz Circle,Apartment,4600000,19000,95,55,101,6.5
-2025-02-01,Hyderabad,Gachibowli,Apartment,7850000,32200,185,98,104,6.5
-2025-02-01,Vizag,Madhurawada,Apartment,5150000,21200,135,72,102,6.5
-2025-02-01,Vijayawada,Benz Circle,Apartment,4620000,19100,100,56,101,6.5
-2025-03-01,Hyderabad,Kondapur,Apartment,7500000,30500,170,88,105,6.5
-2025-03-01,Vizag,Rushikonda,Apartment,6200000,25000,110,68,103,6.5
-2025-03-01,Vijayawada,Poranki,House,5800000,22000,90,50,102,6.5
-2025-04-01,Hyderabad,Gachibowli,Apartment,7950000,32500,190,102,105,6.25
-2025-04-01,Vizag,Madhurawada,Apartment,5200000,21400,140,74,103,6.25
-2025-04-01,Vijayawada,Benz Circle,Apartment,4680000,19300,105,59,102,6.25
-2025-05-01,Hyderabad,Kondapur,Apartment,7650000,31000,175,91,105,6.25
-2025-05-01,Vizag,Rushikonda,Apartment,6300000,25500,115,70,104,6.25
-2025-05-01,Vijayawada,Poranki,House,5900000,22500,95,53,103,6.25
-2025-06-01,Hyderabad,Gachibowli,Apartment,8100000,33000,200,108,106,6.25
-2025-06-01,Vizag,Madhurawada,Apartment,5300000,21800,145,79,104,6.25
-2025-06-01,Vijayawada,Benz Circle,Apartment,4750000,19600,110,61,103,6.25
-2025-07-01,Hyderabad,Kondapur,Apartment,7800000,31500,180,95,106,6.0
-2025-07-01,Vizag,Rushikonda,Apartment,6450000,26000,120,73,104,6.0
-2025-07-01,Vijayawada,Poranki,House,6000000,23000,100,56,103,6.0
-2025-08-01,Hyderabad,Gachibowli,Apartment,8250000,33500,205,112,107,6.0
-2025-08-01,Vizag,Madhurawada,Apartment,5400000,22200,150,82,105,6.0
-2025-08-01,Vijayawada,Benz Circle,Apartment,4800000,19800,115,64,104,6.0
-2025-09-01,Hyderabad,Kondapur,Apartment,7950000,32000,185,99,107,6.0
-2025-09-01,Vizag,Rushikonda,Apartment,6600000,26500,125,77,105,6.0
-2025-09-01,Vijayawada,Poranki,House,6100000,23500,105,59,104,6.0
-2025-10-01,Hyderabad,Gachibowli,Apartment,8400000,34000,210,116,108,5.75
-2025-10-01,Vizag,Madhurawada,Apartment,5500000,22600,155,85,106,5.75
-2025-10-01,Vijayawada,Benz Circle,Apartment,4850000,20000,120,67,105,5.75
-2025-11-01,Hyderabad,Kondapur,Apartment,8100000,32500,190,102,108,5.75
-2025-11-01,Vizag,Rushikonda,Apartment,6750000,27000,130,80,106,5.75
-2025-11-01,Vijayawada,Poranki,House,6200000,24000,110,62,105,5.75
-2025-12-01,Hyderabad,Gachibowli,Apartment,8550000,34500,215,120,109,5.75
-2025-12-01,Vizag,Madhurawada,Apartment,5600000,23000,160,88,107,5.75
-2025-12-01,Vijayawada,Benz Circle,Apartment,4900000,20200,125,70,106,5.75
+Month,City,Neighborhood,PropertyType,AverageSalePrice,AverageMonthlyRent,Listings,Transactions,PopulationIndex,PolicyRatePct,Latitude,Longitude,RecordType
+2025-01-01,Hyderabad,Gachibowli,Apartment,8200000,33567,202,109,106,6.5,17.4401,78.3489,Synthetic illustration
+2025-01-01,Hyderabad,Kondapur,Apartment,7707383,31560,188,98,107,6.5,17.4605,78.3567,Synthetic illustration
+2025-01-01,Vizag,Madhurawada,Apartment,5359004,22035,150,80,104,6.5,17.8151,83.355,Synthetic illustration
+2025-01-01,Vizag,Rushikonda,Apartment,6412768,26028,119,75,104,6.5,17.7829,83.383,Synthetic illustration
+2025-01-01,Vijayawada,Benz Circle,Apartment,4768657,19609,112,61,103,6.5,16.4972,80.666,Synthetic illustration
+2025-01-01,Vijayawada,Poranki,House,5957122,22796,99,53,103,6.5,16.4786,80.716,Synthetic illustration
+2025-02-01,Hyderabad,Gachibowli,Apartment,8247223,33677,207,112,106,6.5,17.4401,78.3489,Synthetic illustration
+2025-02-01,Hyderabad,Kondapur,Apartment,7749919,31657,193,100,107,6.5,17.4605,78.3567,Synthetic illustration
+2025-02-01,Vizag,Madhurawada,Apartment,5386353,22099,148,82,104,6.5,17.8151,83.355,Synthetic illustration
+2025-02-01,Vizag,Rushikonda,Apartment,6442359,26101,122,73,104,6.5,17.7829,83.383,Synthetic illustration
+2025-02-01,Vijayawada,Benz Circle,Apartment,4788545,19663,115,62,103,6.5,16.4972,80.666,Synthetic illustration
+2025-02-01,Vijayawada,Poranki,House,5980239,22859,98,54,103,6.5,16.4786,80.716,Synthetic illustration
+2025-03-01,Hyderabad,Gachibowli,Apartment,8292520,33780,213,114,106,6.5,17.4401,78.3489,Synthetic illustration
+2025-03-01,Hyderabad,Kondapur,Apartment,7789281,31748,190,102,107,6.5,17.4605,78.3567,Synthetic illustration
+2025-03-01,Vizag,Madhurawada,Apartment,5411089,22160,152,79,104,6.5,17.8151,83.355,Synthetic illustration
+2025-03-01,Vizag,Rushikonda,Apartment,6469100,26172,126,74,104,6.5,17.7829,83.383,Synthetic illustration
+2025-03-01,Vijayawada,Benz Circle,Apartment,4807039,19717,113,63,103,6.5,16.4972,80.666,Synthetic illustration
+2025-03-01,Vijayawada,Poranki,House,6002946,22924,100,56,103,6.5,16.4786,80.716,Synthetic illustration
+2025-04-01,Hyderabad,Gachibowli,Apartment,8334439,33878,209,116,107,6.25,17.4401,78.3489,Synthetic illustration
+2025-04-01,Hyderabad,Kondapur,Apartment,7824883,31836,195,99,108,6.25,17.4605,78.3567,Synthetic illustration
+2025-04-01,Vizag,Madhurawada,Apartment,5433444,22220,156,81,105,6.25,17.8151,83.355,Synthetic illustration
+2025-04-01,Vizag,Rushikonda,Apartment,6493966,26244,124,76,105,6.25,17.7829,83.383,Synthetic illustration
+2025-04-01,Vijayawada,Benz Circle,Apartment,4825205,19773,116,64,104,6.25,16.4972,80.666,Synthetic illustration
+2025-04-01,Vijayawada,Poranki,House,6026674,22992,103,54,104,6.25,16.4786,80.716,Synthetic illustration
+2025-05-01,Hyderabad,Gachibowli,Apartment,8372352,33971,215,113,107,6.25,17.4401,78.3489,Synthetic illustration
+2025-05-01,Hyderabad,Kondapur,Apartment,7857056,31922,200,101,108,6.25,17.4605,78.3567,Synthetic illustration
+2025-05-01,Vizag,Madhurawada,Apartment,5454230,22281,153,83,105,6.25,17.8151,83.355,Synthetic illustration
+2025-05-01,Vizag,Rushikonda,Apartment,6518390,26318,127,77,105,6.25,17.7829,83.383,Synthetic illustration
+2025-05-01,Vijayawada,Benz Circle,Apartment,4844187,19832,119,62,104,6.25,16.4972,80.666,Synthetic illustration
+2025-05-01,Vijayawada,Poranki,House,6052607,23065,101,55,104,6.25,16.4786,80.716,Synthetic illustration
+2025-06-01,Hyderabad,Gachibowli,Apartment,8406615,34063,220,115,107,6.25,17.4401,78.3489,Synthetic illustration
+2025-06-01,Hyderabad,Kondapur,Apartment,7886973,32009,196,103,108,6.25,17.4605,78.3567,Synthetic illustration
+2025-06-01,Vizag,Madhurawada,Apartment,5474647,22344,157,84,105,6.25,17.8151,83.355,Synthetic illustration
+2025-06-01,Vizag,Rushikonda,Apartment,6543913,26396,130,75,105,6.25,17.7829,83.383,Synthetic illustration
+2025-06-01,Vijayawada,Benz Circle,Apartment,4864934,19894,117,64,104,6.25,16.4972,80.666,Synthetic illustration
+2025-06-01,Vijayawada,Poranki,House,6081389,23143,104,56,104,6.25,16.4786,80.716,Synthetic illustration
+2025-07-01,Hyderabad,Gachibowli,Apartment,8438474,34156,217,117,108,6,17.4401,78.3489,Synthetic illustration
+2025-07-01,Hyderabad,Kondapur,Apartment,7916358,32099,202,105,109,6,17.4605,78.3567,Synthetic illustration
+2025-07-01,Vizag,Madhurawada,Apartment,5495982,22410,161,82,106,6,17.8151,83.355,Synthetic illustration
+2025-07-01,Vizag,Rushikonda,Apartment,6571808,26479,128,77,106,6,17.7829,83.383,Synthetic illustration
+2025-07-01,Vijayawada,Benz Circle,Apartment,4887959,19961,120,65,105,6,16.4972,80.666,Synthetic illustration
+2025-07-01,Vijayawada,Poranki,House,6112964,23226,107,57,105,6,16.4786,80.716,Synthetic illustration
+2025-08-01,Hyderabad,Gachibowli,Apartment,8469767,34251,222,120,108,6,17.4401,78.3489,Synthetic illustration
+2025-08-01,Hyderabad,Kondapur,Apartment,7947065,32194,207,102,109,6,17.4605,78.3567,Synthetic illustration
+2025-08-01,Vizag,Madhurawada,Apartment,5519300,22480,158,84,106,6,17.8151,83.355,Synthetic illustration
+2025-08-01,Vizag,Rushikonda,Apartment,6602766,26568,131,78,106,6,17.7829,83.383,Synthetic illustration
+2025-08-01,Vijayawada,Benz Circle,Apartment,4913219,20033,123,66,105,6,16.4972,80.666,Synthetic illustration
+2025-08-01,Vijayawada,Poranki,House,6146595,23313,105,56,105,6,16.4786,80.716,Synthetic illustration
+2025-09-01,Hyderabad,Gachibowli,Apartment,8502468,34352,228,116,108,6,17.4401,78.3489,Synthetic illustration
+2025-09-01,Hyderabad,Kondapur,Apartment,7980626,32294,203,104,109,6,17.4605,78.3567,Synthetic illustration
+2025-09-01,Vizag,Madhurawada,Apartment,5545180,22555,162,85,106,6,17.8151,83.355,Synthetic illustration
+2025-09-01,Vizag,Rushikonda,Apartment,6636729,26662,134,80,106,6,17.7829,83.383,Synthetic illustration
+2025-09-01,Vijayawada,Benz Circle,Apartment,4940124,20107,121,64,105,6,16.4972,80.666,Synthetic illustration
+2025-09-01,Vijayawada,Poranki,House,6181040,23403,107,57,105,6,16.4786,80.716,Synthetic illustration
+2025-10-01,Hyderabad,Gachibowli,Apartment,8538209,34459,224,119,109,5.75,17.4401,78.3489,Synthetic illustration
+2025-10-01,Hyderabad,Kondapur,Apartment,8017873,32402,208,106,110,5.75,17.4605,78.3567,Synthetic illustration
+2025-10-01,Vizag,Madhurawada,Apartment,5573571,22635,166,87,107,5.75,17.8151,83.355,Synthetic illustration
+2025-10-01,Vizag,Rushikonda,Apartment,6672903,26762,132,78,107,5.75,17.7829,83.383,Synthetic illustration
+2025-10-01,Vijayawada,Benz Circle,Apartment,4967680,20185,124,66,106,5.75,16.4972,80.666,Synthetic illustration
+2025-10-01,Vijayawada,Poranki,House,6214858,23496,110,58,106,5.75,16.4786,80.716,Synthetic illustration
+2025-11-01,Hyderabad,Gachibowli,Apartment,8577874,34573,230,121,109,5.75,17.4401,78.3489,Synthetic illustration
+2025-11-01,Hyderabad,Kondapur,Apartment,8058735,32516,213,108,110,5.75,17.4605,78.3567,Synthetic illustration
+2025-11-01,Vizag,Madhurawada,Apartment,5603810,22719,164,84,107,5.75,17.8151,83.355,Synthetic illustration
+2025-11-01,Vizag,Rushikonda,Apartment,6709954,26865,136,79,107,5.75,17.7829,83.383,Synthetic illustration
+2025-11-01,Vijayawada,Benz Circle,Apartment,4994735,20265,127,67,106,5.75,16.4972,80.666,Synthetic illustration
+2025-11-01,Vijayawada,Poranki,House,6246762,23588,108,59,106,5.75,16.4786,80.716,Synthetic illustration
+2025-12-01,Hyderabad,Gachibowli,Apartment,8621389,34695,235,123,109,5.75,17.4401,78.3489,Synthetic illustration
+2025-12-01,Hyderabad,Kondapur,Apartment,8102257,32637,210,105,110,5.75,17.4605,78.3567,Synthetic illustration
+2025-12-01,Vizag,Madhurawada,Apartment,5634782,22807,168,86,107,5.75,17.8151,83.355,Synthetic illustration
+2025-12-01,Vizag,Rushikonda,Apartment,6746329,26970,139,81,107,5.75,17.7829,83.383,Synthetic illustration
+2025-12-01,Vijayawada,Benz Circle,Apartment,5020258,20344,125,68,106,5.75,16.4972,80.666,Synthetic illustration
+2025-12-01,Vijayawada,Poranki,House,6275933,23679,111,57,106,5.75,16.4786,80.716,Synthetic illustration
