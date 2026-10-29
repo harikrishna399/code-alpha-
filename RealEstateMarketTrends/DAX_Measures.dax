@@ -1,0 +1,26 @@
+-- Table name assumed: property_market_data
+Average Sale Price = AVERAGE(property_market_data[AverageSalePrice])
+
+Average Monthly Rent = AVERAGE(property_market_data[AverageMonthlyRent])
+
+Total Listings = SUM(property_market_data[Listings])
+
+Total Transactions = SUM(property_market_data[Transactions])
+
+Demand to Supply Ratio =
+DIVIDE([Total Transactions], [Total Listings], 0)
+
+Estimated Annual Rental Yield % =
+DIVIDE([Average Monthly Rent] * 12, [Average Sale Price], 0)
+
+-- Use this measure with Month on a visual and a Date table relationship.
+Sale Price Previous Month =
+CALCULATE([Average Sale Price], DATEADD('Date'[Date], -1, MONTH))
+
+Sale Price MoM Change % =
+DIVIDE([Average Sale Price] - [Sale Price Previous Month], [Sale Price Previous Month], 0)
+
+Average Policy Rate = AVERAGE(property_market_data[PolicyRatePct])
+
+-- Rental yield is a gross estimate based on sample averages. It excludes
+-- vacancy, maintenance, taxes, financing and transaction costs.
