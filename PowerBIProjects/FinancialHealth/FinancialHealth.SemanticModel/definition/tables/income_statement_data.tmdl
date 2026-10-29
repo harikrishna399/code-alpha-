@@ -1,0 +1,95 @@
+table income_statement_data
+	measure 'Total Revenue' = SUM(income_statement_data[Revenue])
+		formatString: ₹ #,##0
+
+	measure 'Total Expenses' = SUM(income_statement_data[TotalExpenses])
+		formatString: ₹ #,##0
+
+	measure 'Net Profit' = SUM(income_statement_data[NetIncome])
+		formatString: ₹ #,##0
+
+	measure 'Profit Margin %' = DIVIDE([Net Profit], [Total Revenue], 0)
+		formatString: 0.0%
+
+	measure 'Revenue Budget' = SUM(income_statement_data[BudgetRevenue])
+		formatString: ₹ #,##0
+
+	measure 'Expense Budget' = SUM(income_statement_data[BudgetExpenses])
+		formatString: ₹ #,##0
+
+	measure 'Revenue Variance' = [Total Revenue] - [Revenue Budget]
+		formatString: ₹ #,##0
+
+	measure 'Expense Variance' = [Total Expenses] - [Expense Budget]
+		formatString: ₹ #,##0
+
+	column Date
+		dataType: dateTime
+		summarizeBy: none
+		sourceColumn: Date
+		formatString: yyyy-mm-dd
+
+	column Revenue
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+	column CostOfGoodsSold
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: CostOfGoodsSold
+
+	column OperatingExpenses
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: OperatingExpenses
+
+	column OtherExpenses
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: OtherExpenses
+
+	column Depreciation
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: Depreciation
+
+	column InterestExpense
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: InterestExpense
+
+	column IncomeTax
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: IncomeTax
+
+	column TotalExpenses
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: TotalExpenses
+
+	column NetIncome
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: NetIncome
+
+	column BudgetRevenue
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: BudgetRevenue
+
+	column BudgetExpenses
+		dataType: int64
+		summarizeBy: sum
+		sourceColumn: BudgetExpenses
+
+	partition income_statement_data = m
+		mode: import
+		source =
+			let
+				Source = Csv.Document(Binary.FromText("RGF0ZSxSZXZlbnVlLENvc3RPZkdvb2RzU29sZCxPcGVyYXRpbmdFeHBlbnNlcyxPdGhlckV4cGVuc2VzLERlcHJlY2lhdGlvbixJbnRlcmVzdEV4cGVuc2UsSW5jb21lVGF4LFRvdGFsRXhwZW5zZXMsTmV0SW5jb21lLEJ1ZGdldFJldmVudWUsQnVkZ2V0RXhwZW5zZXMKMjAyNS0wMS0wMSw0NjUwMDAsMTc0Mzc1LDExODAwMCwxNjAwMCwxODAwMCwxMTUwMCwyNDE1NCwzNjIwMjksMTAyOTcxLDQ1NTcwMCwzNTg0MDkKMjAyNS0wMi0wMSw0ODUyMDAsMTgzNDA2LDExOTkwMCwxNjQ1MCwxODE4MCwxMTM0MCwyNTgyNiwzNzUxMDIsMTEwMDk4LDQ3ODQwNywzNzEzNTEKMjAyNS0wMy0wMSw0ODA0MDAsMTgzMDMyLDEyMTgwMCwxNjkwMCwxODM2MCwxMTE4MCwyNDUzNCwzNzU4MDYsMTA0NTk0LDQ3NjU1NywzNzIwNDgKMjAyNS0wNC0wMSw1MTI2MDAsMTk2ODM4LDEyMzcwMCwxNzM1MCwxODU0MCwxMTAyMCwyNzU3OSwzOTUwMjcsMTE3NTczLDUwMjM0OCwzOTEwNzcKMjAyNS0wNS0wMSw1MTQ4MDAsMTkzMDUwLDEyNTYwMCwxNzgwMCwxODcyMCwxMDg2MCwyODI2NiwzOTQyOTYsMTIwNTA0LDUwNzU5MywzOTAzNTMKMjAyNS0wNi0wMSw1MTgwMDAsMTk1ODA0LDEyNzUwMCwxODI1MCwxODkwMCwxMDcwMCwyNzkwMSwzOTkwNTUsMTE4OTQ1LDUxMzg1NiwzOTUwNjQKMjAyNS0wNy0wMSw1MzIyMDAsMjAyNzY4LDEyOTQwMCwxODcwMCwxOTA4MCwxMDU0MCwyODgyNSw0MDkzMTMsMTIyODg3LDUyMTU1Niw0MDUyMjAKMjAyNS0wOC0wMSw1NTI0MDAsMjEyMTIyLDEzMTMwMCwxOTE1MCwxOTI2MCwxMDM4MCwzMDQzNiw0MjI2NDgsMTI5NzUyLDU0NDY2Niw0MTg0MjIKMjAyNS0wOS0wMSw1NDc2MDAsMjA1MzUwLDEzMzIwMCwxOTYwMCwxOTQ0MCwxMDIyMCwzMDM2MCw0MTgxNzAsMTI5NDMwLDU0MzIxOSw0MTM5ODgKMjAyNS0xMC0wMSw1Nzk4MDAsMjE5MTY0LDEzNTEwMCwyMDA1MCwxOTYyMCwxMDA2MCwzMzQwMyw0MzczOTcsMTQyNDAzLDU2ODIwNCw0MzMwMjMKMjAyNS0xMS0wMSw1ODIwMDAsMjIxNzQyLDEzNzAwMCwyMDUwMCwxOTgwMCw5OTAwLDMyODgxLDQ0MTgyMywxNDAxNzcsNTczODUyLDQzNzQwNQoyMDI1LTEyLTAxLDU4NTIwMCwyMjQ3MTcsMTM4OTAwLDIwOTUwLDE5OTgwLDk3NDAsMzI0NzMsNDQ2NzYwLDEzODQ0MCw1ODA1MTgsNDQyMjkyCjIwMjYtMDEtMDEsNTk5NDAwLDIyNDc3NSwxNDA4MDAsMjE0MDAsMjAxNjAsOTU4MCwzNDcxMCw0NTE0MjUsMTQ3OTc1LDU4NzQxMiw0NDY5MTEKMjAyNi0wMi0wMSw2MTk2MDAsMjM0MjA5LDE0MjcwMCwyMTg1MCwyMDM0MCw5NDIwLDM2MzA1LDQ2NDgyNCwxNTQ3NzYsNjEwOTI2LDQ2MDE3NgoyMDI2LTAzLTAxLDYxNDgwMCwyMzQyMzksMTQ0NjAwLDIyMzAwLDIwNTIwLDkzMDAsMzQ5MzAsNDY1ODg5LDE0ODkxMSw2MDk4ODIsNDYxMjMwCjIwMjYtMDQtMDEsNjQ3MDAwLDI0ODQ0OCwxNDY1MDAsMjI3NTAsMjA3MDAsOTMwMCwzNzg2Nyw0ODU1NjUsMTYxNDM1LDYzNDA2MCw0ODA3MDkKMjAyNi0wNS0wMSw2NDkyMDAsMjQzNDUwLDE0ODQwMCwyMzIwMCwyMDg4MCw5MzAwLDM4NzU0LDQ4Mzk4NCwxNjUyMTYsNjQwMTExLDQ3OTE0NAoyMDI2LTA2LTAxLDY1MjQwMCwyNDY2MDcsMTUwMzAwLDIzNjUwLDIxMDYwLDkzMDAsMzgyODIsNDg5MTk5LDE2MzIwMSw2NDcxODEsNDg0MzA3", BinaryEncoding.Base64), [Delimiter=",", Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				#"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				#"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers", {{"Date", type date}, {"Revenue", Int64.Type}, {"CostOfGoodsSold", Int64.Type}, {"OperatingExpenses", Int64.Type}, {"OtherExpenses", Int64.Type}, {"Depreciation", Int64.Type}, {"InterestExpense", Int64.Type}, {"IncomeTax", Int64.Type}, {"TotalExpenses", Int64.Type}, {"NetIncome", Int64.Type}, {"BudgetRevenue", Int64.Type}, {"BudgetExpenses", Int64.Type}}, "en-US")
+			in
+				#"Changed Type"
