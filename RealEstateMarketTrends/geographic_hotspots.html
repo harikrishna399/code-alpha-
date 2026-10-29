@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Real Estate Geographic Hotspots</title><link rel="stylesheet" href="../dashboard.css"></head>
+<body><main class="wrap"><header class="hero"><div class="eyebrow">CodeAlpha · Task 3 · Geography</div><h1>Neighborhood Hotspots</h1><p>Approximate coordinate plot of the six sample neighborhood centers. Bubble size represents the latest sample transaction count.</p><div class="notice">This is a latitude/longitude plot, not a basemap and not property-level geolocation. Validate the Power BI Map visual in Desktop.</div></header><section class="panel"><div class="toolbar"><h2>Geographic coordinate plot</h2><input id="q" placeholder="Filter city or neighborhood…"></div><svg id="map" viewBox="0 0 900 480" role="img" aria-label="Approximate neighborhood longitude and latitude plot" style="width:100%;min-height:250px"></svg><div id="legend" class="muted"></div></section><section class="panel" style="margin-top:16px"><h2>Point summary</h2><div class="table-wrap" id="table"></div></section><p id="status" class="footer">Loading market data…</p><p class="footer"><a href="dashboard.html">Market overview</a> · <a href="README.md">Project limitations</a></p></main>
+<script>
+(async function(){
+ const $=id=>document.getElementById(id);
+ const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+ try {
+  const res=await fetch("property_market_data.csv");
+  if(!res.ok)throw new Error("Could not load CSV; serve through GitHub Pages or a local web server.");
+  const txt=await res.text();
+  const headers=txt.trim().split(/\r?\n/)[0].split(",");
+  const index={};headers.forEach((h,i)=>index[h]=i);
+  const rows=txt.trim().split(/\r?\n/).slice(1).map(line=>{
+   const p=line.split(",");
+   return {Month:p[index.Month],City:p[index.City],Neighborhood:p[index.Neighborhood],AverageSalePrice:+p[index.AverageSalePrice],AverageMonthlyRent:+p[index.AverageMonthlyRent],Listings:+p[index.Listings],Transactions:+p[index.Transactions],Latitude:+p[index.Latitude],Longitude:+p[index.Longitude]};
+  });
+  const by=new Map();rows.forEach(r=>{const old=by.get(r.Neighborhood);if(!old||r.Month>old.Month)by.set(r.Neighborhood,r);});
+  const points=Array.from(by.values());
+  function render(){
+   const q=$("q").value.toLowerCase();
+   const list=points.filter(p=>(p.City+" "+p.Neighborhood).toLowerCase().includes(q));
+   const xs=list.map(p=>p.Longitude),ys=list.map(p=>p.Latitude);
+   if(!list.length){$("map").innerHTML="";$("table").innerHTML="<p>No matching neighborhoods.</p>";return;}
+   const minX=Math.min(...xs)-.01,maxX=Math.max(...xs)+.01,minY=Math.min(...ys)-.01,maxY=Math.max(...ys)+.01;
+   const px=x=>70+(x-minX)/(maxX-minX)*760,py=y=>400-(y-minY)/(maxY-minY)*330;
+   let svg='<rect x="30" y="20" width="830" height="420" rx="12" fill="#f5f7fb" stroke="#dce3ef"/>';
+   for(let i=0;i<5;i++){const x=70+i*190,y=55+i*78;svg+='<line x1="'+x+'" y1="35" x2="'+x+'" y2="430" stroke="#dce3ef"/><line x1="45" y1="'+y+'" x2="850" y2="'+y+'" stroke="#dce3ef"/>';}
+   list.forEach(p=>{
+    const radius=7+Math.sqrt(Math.max(p.Transactions,1))*.75;
+    svg+='<circle cx="'+px(p.Longitude)+'" cy="'+py(p.Latitude)+'" r="'+radius+'" fill="#3156d3" fill-opacity=".75" stroke="#fff" stroke-width="2"><title>'+esc(p.City+" — "+p.Neighborhood+"; transactions "+p.Transactions)+'</title></circle>';
+    svg+='<text x="'+(px(p.Longitude)+radius+4)+'" y="'+(py(p.Latitude)+4)+'" font-size="13" fill="#172033">'+esc(p.Neighborhood)+'</text>';
+   });
+   svg+='<text x="450" y="468" text-anchor="middle" fill="#65728a" font-size="12">Longitude (approximate)</text><text x="18" y="230" transform="rotate(-90 18 230)" text-anchor="middle" fill="#65728a" font-size="12">Latitude (approximate)</text>';
+   $("map").innerHTML=svg;
+   $("legend").textContent=list.length+" neighborhood centers shown; bubble size is proportional to transactions in the latest sample month.";
+   $("table").innerHTML='<table><thead><tr><th>City</th><th>Neighborhood</th><th>Sale Price</th><th>Monthly Rent</th><th>Listings</th><th>Transactions</th><th>Latitude</th><th>Longitude</th></tr></thead><tbody>'+list.map(p=>'<tr><td>'+esc(p.City)+'</td><td>'+esc(p.Neighborhood)+'</td><td>'+p.AverageSalePrice.toLocaleString("en-IN")+'</td><td>'+p.AverageMonthlyRent.toLocaleString("en-IN")+'</td><td>'+p.Listings+'</td><td>'+p.Transactions+'</td><td>'+p.Latitude+'</td><td>'+p.Longitude+'</td></tr>').join("")+'</tbody></table>';
+  }
+  $("q").addEventListener("input",render);render();
+  $("status").textContent=rows.length+" month-neighborhood rows loaded; unique plotted neighborhoods: "+points.length+".";
+ } catch(e){$("status").textContent=e.message;}
+})();
+</script></body></html>
