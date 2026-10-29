@@ -46,3 +46,20 @@ Use only authorized data. Avoid publishing personal employee/student information
 ## License
 
 Educational internship/portfolio project.
+
+## Browser dashboard previews
+
+The repository now includes four responsive browser previews that read the included CSV files and display summary cards, grouped bar charts, and searchable data tables:
+
+- Financial Health: [Open preview](FinancialHealthDashboard/dashboard.html)
+- HR Analytics: [Open preview](HRAnalytics/dashboard.html)
+- Real Estate Trends: [Open preview](RealEstateMarketTrends/dashboard.html)
+- Educational Performance: [Open preview](EducationalPerformance/dashboard.html)
+
+To run them interactively, enable GitHub Pages using the steps in [GITHUB_PAGES.md](GITHUB_PAGES.md). The previews are companion demos, not native Power BI reports.
+
+## Validation and handoff
+
+- Run the CSV structural checks from the repository root: `python scripts/validate_data.py`.
+- Read [PROJECT_STATUS.md](PROJECT_STATUS.md) for the exact completion status and remaining Power BI Desktop steps.
+- Use [LINKEDIN_DEMO_SCRIPT.md](LINKEDIN_DEMO_SCRIPT.md) to record an accurate project demo.
