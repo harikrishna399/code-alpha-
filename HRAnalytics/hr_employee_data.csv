@@ -1,0 +1,21 @@
+EmployeeID,Department,JobRole,Location,HireDate,ExitDate,EmploymentStatus,RecruitmentSource,PerformanceRating,SatisfactionScore,TrainingHours,MonthlySalary
+E001,Engineering,Analyst,Hyderabad,2022-01-10,,Active,Referral,4,4.2,32,65000
+E002,Sales,Executive,Vizag,2021-05-18,,Active,Job Portal,3,3.7,18,42000
+E003,HR,Coordinator,Hyderabad,2023-03-06,,Active,Campus,4,4.5,26,39000
+E004,Operations,Specialist,Vijayawada,2020-11-21,2025-07-15,Exited,Job Portal,3,3.1,12,44000
+E005,Engineering,Developer,Hyderabad,2024-02-12,,Active,Referral,5,4.6,40,78000
+E006,Sales,Executive,Vizag,2022-08-01,2025-10-01,Exited,Campus,2,2.8,10,40000
+E007,Finance,Accountant,Hyderabad,2021-09-14,,Active,Job Portal,4,4.1,24,52000
+E008,Operations,Specialist,Vijayawada,2023-06-19,,Active,Referral,3,3.8,20,46000
+E009,Engineering,Analyst,Hyderabad,2020-04-27,2025-12-20,Exited,Job Portal,4,3.6,28,69000
+E010,HR,Recruiter,Vizag,2024-07-08,,Active,Campus,4,4.3,30,41000
+E011,Finance,Accountant,Hyderabad,2022-12-05,,Active,Referral,3,3.9,22,54000
+E012,Sales,Executive,Vijayawada,2023-01-16,,Active,Job Portal,4,4.0,25,43000
+E013,Engineering,Developer,Hyderabad,2021-07-22,,Active,Referral,5,4.7,38,80000
+E014,Operations,Specialist,Vizag,2022-04-11,2025-08-30,Exited,Campus,2,2.9,14,45000
+E015,HR,Coordinator,Hyderabad,2020-10-02,,Active,Job Portal,4,4.2,27,40000
+E016,Sales,Executive,Vizag,2024-01-09,,Active,Campus,3,3.6,16,41500
+E017,Finance,Analyst,Hyderabad,2023-09-25,,Active,Referral,4,4.4,29,58000
+E018,Engineering,Developer,Vijayawada,2022-06-13,,Active,Job Portal,4,4.0,34,74000
+E019,Operations,Specialist,Hyderabad,2021-02-17,,Active,Referral,3,3.5,21,47000
+E020,Sales,Executive,Vizag,2020-03-03,2025-11-10,Exited,Job Portal,2,2.7,11,40500
