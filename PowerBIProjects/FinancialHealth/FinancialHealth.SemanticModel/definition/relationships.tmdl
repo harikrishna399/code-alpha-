@@ -1,0 +1,11 @@
+relationship 'IncomeStatementDate'
+	fromColumn: income_statement_data.Date
+	toColumn: DateTable.Date
+
+relationship 'BalanceSheetDate'
+	fromColumn: balance_sheet_data.Date
+	toColumn: DateTable.Date
+
+relationship 'CashFlowDate'
+	fromColumn: cash_flow_data.Date
+	toColumn: DateTable.Date
