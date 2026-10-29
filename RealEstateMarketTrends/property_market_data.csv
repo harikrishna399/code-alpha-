@@ -1,0 +1,37 @@
+Month,City,Neighborhood,PropertyType,AverageSalePrice,AverageMonthlyRent,Listings,Transactions,PopulationIndex,PolicyRatePct
+2025-01-01,Hyderabad,Gachibowli,Apartment,7800000,32000,180,95,104,6.5
+2025-01-01,Vizag,Madhurawada,Apartment,5100000,21000,130,70,102,6.5
+2025-01-01,Vijayawada,Benz Circle,Apartment,4600000,19000,95,55,101,6.5
+2025-02-01,Hyderabad,Gachibowli,Apartment,7850000,32200,185,98,104,6.5
+2025-02-01,Vizag,Madhurawada,Apartment,5150000,21200,135,72,102,6.5
+2025-02-01,Vijayawada,Benz Circle,Apartment,4620000,19100,100,56,101,6.5
+2025-03-01,Hyderabad,Kondapur,Apartment,7500000,30500,170,88,105,6.5
+2025-03-01,Vizag,Rushikonda,Apartment,6200000,25000,110,68,103,6.5
+2025-03-01,Vijayawada,Poranki,House,5800000,22000,90,50,102,6.5
+2025-04-01,Hyderabad,Gachibowli,Apartment,7950000,32500,190,102,105,6.25
+2025-04-01,Vizag,Madhurawada,Apartment,5200000,21400,140,74,103,6.25
+2025-04-01,Vijayawada,Benz Circle,Apartment,4680000,19300,105,59,102,6.25
+2025-05-01,Hyderabad,Kondapur,Apartment,7650000,31000,175,91,105,6.25
+2025-05-01,Vizag,Rushikonda,Apartment,6300000,25500,115,70,104,6.25
+2025-05-01,Vijayawada,Poranki,House,5900000,22500,95,53,103,6.25
+2025-06-01,Hyderabad,Gachibowli,Apartment,8100000,33000,200,108,106,6.25
+2025-06-01,Vizag,Madhurawada,Apartment,5300000,21800,145,79,104,6.25
+2025-06-01,Vijayawada,Benz Circle,Apartment,4750000,19600,110,61,103,6.25
+2025-07-01,Hyderabad,Kondapur,Apartment,7800000,31500,180,95,106,6.0
+2025-07-01,Vizag,Rushikonda,Apartment,6450000,26000,120,73,104,6.0
+2025-07-01,Vijayawada,Poranki,House,6000000,23000,100,56,103,6.0
+2025-08-01,Hyderabad,Gachibowli,Apartment,8250000,33500,205,112,107,6.0
+2025-08-01,Vizag,Madhurawada,Apartment,5400000,22200,150,82,105,6.0
+2025-08-01,Vijayawada,Benz Circle,Apartment,4800000,19800,115,64,104,6.0
+2025-09-01,Hyderabad,Kondapur,Apartment,7950000,32000,185,99,107,6.0
+2025-09-01,Vizag,Rushikonda,Apartment,6600000,26500,125,77,105,6.0
+2025-09-01,Vijayawada,Poranki,House,6100000,23500,105,59,104,6.0
+2025-10-01,Hyderabad,Gachibowli,Apartment,8400000,34000,210,116,108,5.75
+2025-10-01,Vizag,Madhurawada,Apartment,5500000,22600,155,85,106,5.75
+2025-10-01,Vijayawada,Benz Circle,Apartment,4850000,20000,120,67,105,5.75
+2025-11-01,Hyderabad,Kondapur,Apartment,8100000,32500,190,102,108,5.75
+2025-11-01,Vizag,Rushikonda,Apartment,6750000,27000,130,80,106,5.75
+2025-11-01,Vijayawada,Poranki,House,6200000,24000,110,62,105,5.75
+2025-12-01,Hyderabad,Gachibowli,Apartment,8550000,34500,215,120,109,5.75
+2025-12-01,Vizag,Madhurawada,Apartment,5600000,23000,160,88,107,5.75
+2025-12-01,Vijayawada,Benz Circle,Apartment,4900000,20200,125,70,106,5.75
