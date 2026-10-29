@@ -1,0 +1,18 @@
+# Power BI temporary and local files
+*.tmp
+*.bak
+~$*
+.DS_Store
+Thumbs.db
+
+# Local environment files
+.env
+.env.*
+
+# Editor settings
+.vscode/
+.idea/
+
+# Python caches (if used for supplemental analysis)
+__pycache__/
+*.py[cod]
