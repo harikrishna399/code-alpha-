@@ -1,37 +1,48 @@
-# CodeAlpha Power BI Internship Projects
+# CodeAlpha Power BI Internship — Complete Project Kits
 
-This repository contains two Power BI project starter kits based on the CodeAlpha task brief:
+This repository contains implementation kits for **all four tasks** listed in the supplied CodeAlpha Power BI internship brief.
 
-1. **Financial Health Dashboard** — income, expenses, profit, cash flow, and budget tracking.
-2. **Human Resources Analytics** — recruitment, turnover, workforce performance, and hiring needs.
+## Projects
 
-## Repository structure
+| Task | Folder | Included |
+|---|---|---|
+| 1. Financial Health Dashboard | `FinancialHealthDashboard/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
+| 2. Human Resources Analytics | `HRAnalytics/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
+| 3. Real Estate Market Trends | `RealEstateMarketTrends/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
+| 4. Educational Performance & Resource Allocation | `EducationalPerformance/` | Synthetic CSV, DAX measures, Power Query notes, report layout, README |
 
-- `FinancialHealthDashboard/` — sample CSV data, DAX measures, Power Query guidance, dashboard design, and project documentation.
-- `HRAnalytics/` — sample CSV data, DAX measures, Power Query guidance, dashboard design, and project documentation.
+## Build each Power BI report
 
-## Important note
+For each project:
 
-The datasets are **synthetic sample data** created for demonstration and learning; they do not represent a real company. This repository includes the data and implementation materials needed to build the reports in Power BI Desktop. A native `.pbix` report must still be assembled and saved in Power BI Desktop, then added to the relevant project folder.
+1. Open **Power BI Desktop**.
+2. Import the project's CSV using **Get data → Text/CSV**.
+3. Follow its README and Power Query notes to set data types and table names.
+4. Create a Date table and relationships when described in the project README.
+5. Add measures from `DAX_Measures.dax` using **Modeling → New measure**. DAX files are reference text, not directly executable project files.
+6. Build the pages and visuals from `dashboard_layout.md`.
+7. Validate filters, measure totals, formats, and caveats.
+8. Save a native report as `<ProjectName>.pbix` in its project folder, then commit/push it to this repository.
 
-## Quick start
+## Important status and limitations
 
-1. Install Power BI Desktop.
-2. Open Power BI Desktop and select **Get data → Text/CSV**.
-3. Import the CSV file(s) in the project folder.
-4. Follow the project's README to create the measures and visuals.
-5. Save the report as `.pbix` in the same project folder.
-6. Publish to Power BI Service only if your account and organization's settings allow it.
+- CSV files contain **synthetic demonstration data**; they are not real company, employee, property-market, or student records.
+- This repository contains datasets, DAX starter measures, Power Query instructions, and dashboard implementation specifications.
+- **Native Power BI `.pbix` reports are not included yet.** They must be assembled and saved in Power BI Desktop, which is required to create and validate the actual report files.
+- Forecasts must be built and validated with appropriate historical data. Do not present sample trends as verified predictions.
+- The financial sample does not contain a complete balance sheet or transaction-level cash-flow ledger. Real-estate data is illustrative rather than current market data. HR and educational sample results are not suitable for real-world decisions.
 
-## Internship deliverables
+## Suggested final deliverables
 
-Each project includes:
-- A synthetic dataset
-- Suggested data model and Power Query steps
-- DAX measures
-- Dashboard layout and slicer recommendations
-- Key business questions and validation checklist
+For each folder, include:
+- `<ProjectName>.pbix` — completed Power BI report
+- Existing CSV, DAX, Power Query notes, layout guide, and README
+- Optional screenshots of report pages for the project presentation
+
+## Privacy and safe use
+
+Use only authorized data. Avoid publishing personal employee/student information or confidential business records. Apply appropriate access controls before publishing real data to Power BI Service.
 
 ## License
 
-Educational portfolio project.
+Educational internship/portfolio project.
